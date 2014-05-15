@@ -1,0 +1,16 @@
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\bin\Debug\WindowsFormsApplicationToWPF.exe.config
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\bin\Debug\WindowsFormsApplicationToWPF.exe
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\bin\Debug\WindowsFormsApplicationToWPF.pdb
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.Properties.Resources.resources
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.csproj.GenerateResource.Cache
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.exe
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.pdb
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\UserControl1.baml
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\UserControl1.g.cs
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF_MarkupCompile.cache
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.g.resources
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.Form1.resources
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WpfLoadingControl.baml
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WpfLoadingControl.g.cs
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\AutoCompleteBox.baml
+H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\AutoCompleteBox.g.cs
