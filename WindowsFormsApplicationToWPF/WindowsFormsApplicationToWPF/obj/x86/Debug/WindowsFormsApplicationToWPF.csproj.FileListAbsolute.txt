@@ -14,3 +14,19 @@ H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicat
 H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WpfLoadingControl.g.cs
 H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\AutoCompleteBox.baml
 H:\visual studio 2010\Projects\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\AutoCompleteBox.g.cs
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\bin\Debug\WindowsFormsApplicationToWPF.exe.config
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.exe
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.pdb
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\bin\Debug\WindowsFormsApplicationToWPF.exe
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\bin\Debug\WindowsFormsApplicationToWPF.pdb
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\AutoCompleteBox.baml
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\UserControl1.baml
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WpfLoadingControl.baml
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\AutoCompleteBox.g.cs
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\UserControl1.g.cs
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WpfLoadingControl.g.cs
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF_MarkupCompile.cache
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.g.resources
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.Form1.resources
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.Properties.Resources.resources
+E:\rrepo\test\WindowsFormsApplicationToWPF\WindowsFormsApplicationToWPF\obj\x86\Debug\WindowsFormsApplicationToWPF.csproj.GenerateResource.Cache

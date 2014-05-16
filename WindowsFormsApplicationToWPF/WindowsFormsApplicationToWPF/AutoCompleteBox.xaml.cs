@@ -34,28 +34,37 @@ namespace WindowsFormsApplicationToWPF
 
         private void comboBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            List<string> ls = new List<string>();
-            lo.ForEach(a =>
-            {
-                if (a.StartsWith(comboBox1.Text))
-                {
-                    ls.Add(a);
-                }
-            });
-            if (ls.Count > 0)
-            {
-                comboBox1.ItemsSource = ls;
-                comboBox1.IsDropDownOpen = true;
-            }
+            
         }
 
         int i = 0;
         private void comboBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.Key == Key.Up)
-            //{
-            //    comboBox1.ite
-            //}
-        }
+            if (e.Key != Key.Up && e.Key != Key.Down)
+            {
+                i = 0;
+                List<string> ls = new List<string>();
+                lo.ForEach(a =>
+                {
+                    if (a.StartsWith(comboBox1.Text))
+                    {
+                        ls.Add(a);
+                    }
+                });
+                if (ls.Count > 0)
+                {
+                    comboBox1.ItemsSource = ls;
+                    comboBox1.IsDropDownOpen = true;
+                }
+            }
+            if (e.Key == Key.Up && i!=0)
+            {
+                comboBox1.SelectedIndex=i--;
+            }
+            if (e.Key == Key.Down && i<comboBox1.Items.Count)
+            {
+                comboBox1.SelectedIndex = i++;
+            }
+       }
     }
 }
