@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="RBClient.WPF.UserControls.SelectedListBoxItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}" IsTabStop="True"
+              >
+    <DockPanel Height="20" LastChildFill="True">
+        <TextBox DockPanel.Dock="Right" Height="20" FontSize="13" x:Name="TextBox1" VerticalAlignment="Center"
+                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Margin="10,-3,0,0" 
+                 Width="50" Text="{Binding Path=hcount,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                 KeyDown="TextBox1_KeyDown" KeyUp="TextBox1_KeyUp" MouseEnter="TextBox1_MouseOver" GotFocus="TextBox1_GotFocus">
+            
+        </TextBox>
+        <CheckBox Content="Название ресторана" FontSize="13" Name="checkBox1" />
+        <TextBlock Text="Название ресторана" FontSize="13" Name="textblock1" />
+    </DockPanel>
+
+</UserControl>
+

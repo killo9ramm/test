@@ -1,0 +1,1 @@
+ALTER TABLE t_Doc ADD COLUMN doc_hash text(255)

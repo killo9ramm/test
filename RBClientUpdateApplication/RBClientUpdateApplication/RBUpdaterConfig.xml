@@ -1,0 +1,14 @@
+﻿<xml version="1.0" encoding="utf-8">
+  <root>
+    <props>
+      <prop name="DataBaseConnectionString" value="metadata=res://*/RBMModel.csdl|res://*/RBMModel.ssdl|res://*/RBMModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=MSKTERM01;Initial Catalog=RBM;Persist Security Info=True;User ID=sa;Password=Qwerty11;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" />
+      <prop name="RBClientReleaseFolder" value="H:\RbUpdaterWorkFolder\release_folder" />
+      <prop name="RBClientArchiveName" value="RBClient.exe" />
+      <prop name="RBUpdateFile" value="H:\RbUpdaterWorkFolder\RBClientUpdate.exeas" />
+      <prop name="RBUCheckTimeout" value="10000" />
+      <prop name="FtpArmFolder" value="H:\FTP\disk_c\ARM\FTP" />
+      <prop name="OutputFolder" value="Out" />
+      <prop name="City" value="2" />
+    </props>
+  </root>
+</xml>

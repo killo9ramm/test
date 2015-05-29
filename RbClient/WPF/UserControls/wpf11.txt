@@ -1,0 +1,178 @@
+﻿SELECT t_Dinner.id, t_Dinner2t_Menu.Id
+FROM t_Dinner RIGHT JOIN t_Dinner2t_Menu ON t_Dinner.id = t_Dinner2t_Menu.Dinner_id
+where t_Dinner.id is null
+
+
+
+<UserControl x:Class="RBClient.WPF.UserControls.MarOtchCentarPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:Uc="clr-namespace:RBClient.WPF.UserControls"
+             d:DesignHeight="400" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="OnBrush" Color="Red" />
+        
+        <Style x:Key="OnOffToggleImageStyle" TargetType="ToggleButton">
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="{StaticResource OnBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#FFEFEFD3">
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="#FFEFEFD3">
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Button  Content="Добавить польз" Name="button_addUser" Click="button_addUser_Click" />
+                    <Button  Content="Удалить польз" Name="button_delUser" Click="button_delUser_Click" />
+                    
+                </StackPanel>
+                <Button Grid.Row="1" Content="Загрузить из табеля" Name="button_loadUser" Click="button_loadUser_Click" />
+            </Grid> <!-- Кнопки добавления удаления-->
+            <Uc:MyPanel Grid.Column="1" x:Name="smena_button_panel">
+                
+            </Uc:MyPanel> <!--панель для кнопок смены--> 
+        </Grid><!--шапка1-->
+
+        <ListView Grid.Row="1" Name="listview_smeni" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="FontSize" Value="25"/>
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+
+                <GridView AllowsColumnReorder="true"
+              ColumnHeaderToolTip="Employee Information">
+                    <GridViewColumn Header="Сотрудник" Width="250">
+                    <GridViewColumn.CellTemplate >
+                        <DataTemplate>
+                                <TextBox x:Name="txtQuantity" Width="250" Height="{Binding ElementName=listview_smeni,Path=RowHeight}" Text="{Binding Path=user_name}" IsReadOnly="{Binding Path=user_edit}" Background="{Binding Path=user_color}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!--<GridViewColumn DisplayMemberBinding="{Binding Path=user_name}" 
+                      Header="Сотрудник" Width="250"/>-->
+
+                    <GridViewColumn                   
+                      Width="250" Header="Обязанность">
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate>
+                                
+                                <TextBox x:Name="txtQuantity" Text="{Binding Path=user_response}"  Background="Yellow" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=user_plan}" 
+                      Header="План" Width="250"/>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=user_fact}" 
+                      Header="Факт" Width="250"/>
+                </GridView>
+                
+                
+
+            </ListView.View>
+
+        </ListView>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Добавить польз" Name="button_addUser1" Click="button_addUser1_Click" />
+            <Button Content="Удалить польз" Name="button_delUser1"/>
+            <Button  Content="Скопировать пользователей" Name="button_copyUsers"/>
+            <Button  Content="Скопировать обеды с касс" Name="button_copyFromMark"/>
+
+        </StackPanel><!--шапка2-->
+        
+        <ListView Grid.Row="3" Name="listView_dinners"></ListView>
+    </Grid>
+</UserControl>
+
+
+
+
+//Binding binding = new Binding();//RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, Path=hcount
+                //binding.Source = this;
+                //binding.Path = new PropertyPath("hcount");
+                //binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+
+                //binding.Mode = BindingMode.TwoWay;
+                //txtbx_hours.SetBinding(System.Windows.Controls.TextBox.TextProperty, binding);
+
+                //Binding binding1 = new Binding();
+                //binding.Source = this;
+                //binding.Path = new PropertyPath("from");
+                //binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                //binding.Mode = BindingMode.TwoWay;
+                //txt_from_hours.SetBinding(System.Windows.Controls.TextBox.TextProperty, binding);
+
+
+
+DependencyProperty				TextBox.TextProperty
+
+//BindingExpression be = txt_from_hours.GetBindingExpression(TextBox.TextProperty);
+                //be.UpdateSource();
+
+
+
+				 //var b = sender as TextBox;
+            //DependencyObject item = b;
+            //while (item is ListBoxItem == false)
+            //{
+            //    item = VisualTreeHelper.GetParent(item);
+            //}
+            //var lbi = (ListBoxItem)item;
+            //listview_smeni.SelectedItem = lbi.DataContext as v_Marotch;
+
+			<!--Width="{Binding ElementName=helperField, Path=ActualWidth}"-->
+
+
+
+
+			<TextBox.Style>
+                                        <Style>
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="true">
+                                                <Setter Property="vm:OutboxReturnViewModelItem.ShowError" Value="True" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+									
+									<TextBox.Text>
+                                        <Binding Path="Quantity_bnd">
+                                            <Binding.ValidationRules>
+                                                <ExceptionValidationRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+									
+									Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"
+									
+									<Setter Property="local:ValidationErrors.InputError" Value="True"/>
+									
+									Text="{Binding Quantity_bnd, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"

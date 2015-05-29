@@ -1,0 +1,29 @@
+﻿<xml version="1.0" encoding="utf-8">
+  <root>
+    <props>
+      <prop name="pr_killer_configs_block" value="info" />
+      <prop name="install_name" value="PcRenamer.exe" />
+      <prop name="file_name" value="PcRenamer.exe" />
+      
+
+      <prop name="suffix" value="pos" />
+      <prop name="dns_suffix" value="888" />
+      <prop name="user_domain" value="msk" />
+      
+
+      <prop name="web_service_connection_credentials" value="info" />
+      <prop name="web_service_url_" value="http://localhost:60257/Service1.asmx" />
+      <prop name="user_name" value="arm_services" />
+      <prop name="password" value="888" />
+      <prop name="validation_by_cert" value="0" />
+      
+
+      <prop name="check_puppet_installation_and_send_notify_block" value="info" />
+      <prop name="start_process_name" value="puppet-2.7.23.msi" />
+      <prop name="pc_name_regex" value="\D+?-pos-\d+?.msk.teremok.biz" />
+      <prop name="pc_type" value="kkm" />
+      <prop name="check_program_is_installed" value="Puppet" />
+      
+    </props>
+  </root>
+</xml>

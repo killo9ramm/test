@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RBMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="RBMModelStoreContainer">
+          <EntitySet Name="t_kkm" EntityType="RBMModel.Store.t_kkm" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_Teremok" EntityType="RBMModel.Store.t_Teremok" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_Web_kkm_z_info" EntityType="RBMModel.Store.t_Web_kkm_z_info" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_Web_ZReport" EntityType="RBMModel.Store.t_Web_ZReport" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_ZReport" EntityType="RBMModel.Store.t_ZReport" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_t_ZReport_t_Teremok" Association="RBMModel.Store.FK_t_ZReport_t_Teremok">
+            <End Role="t_Teremok" EntitySet="t_Teremok" />
+            <End Role="t_ZReport" EntitySet="t_ZReport" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="t_kkm">
+          <Key>
+            <PropertyRef Name="kkm_uid" />
+          </Key>
+          <Property Name="kkm_uid" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="kkm_id" Type="int" Nullable="false" />
+          <Property Name="teremok_1c" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="domain_name" Type="varchar" MaxLength="50" />
+          <Property Name="domain_main_suffix" Type="varchar" MaxLength="50" />
+          <Property Name="date_updated" Type="datetime" />
+          <Property Name="hostname_confirmed" Type="nchar" MaxLength="50" />
+          <Property Name="dom_suffix_confirmed" Type="nchar" MaxLength="200" />
+          <Property Name="date_confirmed" Type="datetime" />
+          <Property Name="date_state_updated" Type="datetime" />
+          <Property Name="isOnline7" Type="bit" />
+          <Property Name="city" Type="int" />
+        </EntityType>
+        <EntityType Name="t_Teremok">
+          <Key>
+            <PropertyRef Name="teremok_id" />
+          </Key>
+          <Property Name="teremok_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="teremok_name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="teremok_address" Type="varchar" MaxLength="250" />
+          <Property Name="teremok_state" Type="int" Nullable="false" />
+          <Property Name="teremok_1C" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_need_update" Type="bit" Nullable="false" />
+          <Property Name="teremok_pass" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_use_ARM" Type="bit" Nullable="false" />
+          <Property Name="teremok_prov" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_prov_rezerv" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_kassa1" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_kassa2" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_kassa3" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_kassa4" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_numberkkm1" Type="int" />
+          <Property Name="teremok_numberkkm2" Type="int" />
+          <Property Name="teremok_numberkkm3" Type="int" />
+          <Property Name="teremok_numberkkm4" Type="int" />
+          <Property Name="teremok_parent" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_1c82" Type="int" />
+          <Property Name="teremok_1c82_date" Type="datetime" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="ip" Type="nchar" MaxLength="20" />
+          <Property Name="teremok_city" Type="nchar" MaxLength="20" />
+          <Property Name="original_id" Type="int" />
+        </EntityType>
+        <EntityType Name="t_Web_kkm_z_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="terem_1c" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="num_kkm" Type="nvarchar" MaxLength="50" />
+          <Property Name="zfile" Type="nvarchar" MaxLength="50" />
+          <Property Name="zdate" Type="datetime" />
+          <Property Name="datetime" Type="datetime" />
+          <Property Name="worked" Type="bit" />
+          <Property Name="lasttime_online" Type="datetime" />
+          <Property Name="date_recieved" Type="datetime" />
+          <Property Name="zsended" Type="bit" />
+          <Property Name="is_online" Type="bit" />
+          <Property Name="shift_num" Type="int" />
+        </EntityType>
+        <EntityType Name="t_Web_ZReport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="terem_1c" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="kkm_num" Type="int" Nullable="false" />
+          <Property Name="date_recieved" Type="datetime" Nullable="false" />
+          <Property Name="zdate" Type="datetime" />
+          <Property Name="zfile" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="zdata" Type="varbinary(max)" Nullable="false" />
+          <Property Name="shift_num" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_ZReport">
+          <Key>
+            <PropertyRef Name="z_id" />
+          </Key>
+          <Property Name="z_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="z_num" Type="int" />
+          <Property Name="z_file" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="z_date" Type="smalldatetime" Nullable="false" />
+          <Property Name="z_kkm_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="z_total" Type="float" Nullable="false" />
+          <Property Name="z_teremok_id" Type="int" Nullable="false" />
+          <Property Name="z_total_return" Type="float" />
+          <Property Name="z_cash" Type="float" />
+          <Property Name="z_cash_return" Type="float" />
+          <Property Name="z_card" Type="float" />
+          <Property Name="z_card_return" Type="float" />
+          <Property Name="z_cupon" Type="float" />
+          <Property Name="z_cupon_return" Type="float" />
+          <Property Name="z_dinner" Type="float" />
+          <Property Name="z_dinner_return" Type="float" />
+          <Property Name="z_kkm" Type="float" />
+          <Property Name="z_type_id" Type="int" />
+          <Property Name="z_date_load" Type="smalldatetime" />
+          <Property Name="z_1c_load" Type="int" />
+          <Property Name="z_num_fiscal" Type="nvarchar" MaxLength="50" />
+          <Property Name="z_num_turn" Type="int" />
+          <Property Name="z_svb_load" Type="int" />
+          <Property Name="z_svb_date_upload" Type="datetime" />
+          <Property Name="z_quantity_check" Type="int" />
+          <Property Name="z_verPO" Type="nvarchar" MaxLength="50" />
+          <Property Name="b" Type="int" />
+        </EntityType>
+        <Association Name="FK_t_ZReport_t_Teremok">
+          <End Role="t_Teremok" Type="RBMModel.Store.t_Teremok" Multiplicity="1" />
+          <End Role="t_ZReport" Type="RBMModel.Store.t_ZReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Teremok">
+              <PropertyRef Name="teremok_id" />
+            </Principal>
+            <Dependent Role="t_ZReport">
+              <PropertyRef Name="z_teremok_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RBMModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="RBMEntities">
+          <EntitySet Name="t_Teremok" EntityType="RBMModel.t_Teremok" />
+          <EntitySet Name="t_Web_kkm_z_info" EntityType="RBMModel.t_Web_kkm_z_info" />
+          <EntitySet Name="t_kkm" EntityType="RBMModel.t_kkm" />
+          <EntitySet Name="t_ZReport" EntityType="RBMModel.t_ZReport" />
+          <AssociationSet Name="FK_t_ZReport_t_Teremok" Association="RBMModel.FK_t_ZReport_t_Teremok">
+            <End Role="t_Teremok" EntitySet="t_Teremok" />
+            <End Role="t_ZReport" EntitySet="t_ZReport" />
+          </AssociationSet>
+          <EntitySet Name="t_Web_ZReport" EntityType="RBMModel.t_Web_ZReport" />
+        </EntityContainer>
+        <EntityType Name="t_Teremok">
+          <Key>
+            <PropertyRef Name="teremok_id" />
+          </Key>
+          <Property Name="teremok_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teremok_name" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_address" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_state" Type="Int32" Nullable="false" />
+          <Property Name="teremok_1C" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_need_update" Type="Boolean" Nullable="false" />
+          <Property Name="teremok_pass" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_use_ARM" Type="Boolean" Nullable="false" />
+          <Property Name="teremok_prov" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_prov_rezerv" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_kassa1" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_kassa2" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_kassa3" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_kassa4" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_numberkkm1" Type="Int32" />
+          <Property Name="teremok_numberkkm2" Type="Int32" />
+          <Property Name="teremok_numberkkm3" Type="Int32" />
+          <Property Name="teremok_numberkkm4" Type="Int32" />
+          <Property Name="teremok_parent" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_1c82" Type="Int32" />
+          <Property Name="teremok_1c82_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="ip" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="teremok_city" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="original_id" Type="Int32" />
+          <NavigationProperty Name="t_ZReport" Relationship="RBMModel.FK_t_ZReport_t_Teremok" FromRole="t_Teremok" ToRole="t_ZReport" />
+        </EntityType>
+        <EntityType Name="t_Web_kkm_z_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="terem_1c" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="num_kkm" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="zfile" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="zdate" Type="DateTime" Precision="3" />
+          <Property Name="datetime" Type="DateTime" Precision="3" />
+          <Property Name="worked" Type="Boolean" />
+          <Property Name="lasttime_online" Type="DateTime" Precision="3" />
+          <Property Name="date_recieved" Type="DateTime" Precision="3" />
+          <Property Name="zsended" Type="Boolean" />
+          <Property Name="is_online" Type="Boolean" />
+          <Property Type="Int32" Name="shift_num" />
+        </EntityType>
+        <EntityType Name="t_kkm">
+          <Key>
+            <PropertyRef Name="kkm_uid" />
+          </Key>
+          <Property Type="String" Name="kkm_uid" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="kkm_id" Nullable="false" />
+          <Property Type="String" Name="teremok_1c" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="domain_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="domain_main_suffix" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="date_updated" Precision="3" />
+          <Property Type="String" Name="hostname_confirmed" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="dom_suffix_confirmed" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Type="DateTime" Name="date_confirmed" Precision="3" />
+          <Property Type="DateTime" Name="date_state_updated" Precision="3" />
+          <Property Type="Boolean" Name="isOnline7" />
+          <Property Type="Int32" Name="city" />
+        </EntityType>
+        <EntityType Name="t_ZReport">
+          <Key>
+            <PropertyRef Name="z_id" />
+          </Key>
+          <Property Type="Int32" Name="z_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="z_num" />
+          <Property Type="String" Name="z_file" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="z_date" Nullable="false" Precision="0" />
+          <Property Type="String" Name="z_kkm_id" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="z_total" Nullable="false" />
+          <Property Type="Double" Name="z_total_return" />
+          <Property Type="Double" Name="z_cash" />
+          <Property Type="Double" Name="z_cash_return" />
+          <Property Type="Double" Name="z_card" />
+          <Property Type="Double" Name="z_card_return" />
+          <Property Type="Double" Name="z_cupon" />
+          <Property Type="Double" Name="z_cupon_return" />
+          <Property Type="Double" Name="z_dinner" />
+          <Property Type="Double" Name="z_dinner_return" />
+          <Property Type="Double" Name="z_kkm" />
+          <Property Type="Int32" Name="z_type_id" />
+          <Property Type="DateTime" Name="z_date_load" Precision="0" />
+          <Property Type="Int32" Name="z_1c_load" />
+          <Property Type="String" Name="z_num_fiscal" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="z_num_turn" />
+          <Property Type="Int32" Name="z_svb_load" />
+          <Property Type="DateTime" Name="z_svb_date_upload" Precision="3" />
+          <Property Type="Int32" Name="z_quantity_check" />
+          <Property Type="String" Name="z_verPO" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="b" />
+          <NavigationProperty Name="t_Teremok" Relationship="RBMModel.FK_t_ZReport_t_Teremok" FromRole="t_ZReport" ToRole="t_Teremok" />
+        </EntityType>
+        <Association Name="FK_t_ZReport_t_Teremok">
+          <End Type="RBMModel.t_Teremok" Role="t_Teremok" Multiplicity="1" />
+          <End Type="RBMModel.t_ZReport" Role="t_ZReport" Multiplicity="*" />
+        </Association>
+        <EntityType Name="t_Web_ZReport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="terem_1c" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="kkm_num" Nullable="false" />
+          <Property Type="DateTime" Name="date_recieved" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="zdate" Precision="3" />
+          <Property Type="String" Name="zfile" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="zdata" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="Int32" Name="shift_num" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="RBMModelStoreContainer" CdmEntityContainer="RBMEntities">
+          <EntitySetMapping Name="t_Teremok">
+            <EntityTypeMapping TypeName="RBMModel.t_Teremok">
+              <MappingFragment StoreEntitySet="t_Teremok">
+                <ScalarProperty Name="teremok_id" ColumnName="teremok_id" />
+                <ScalarProperty Name="teremok_name" ColumnName="teremok_name" />
+                <ScalarProperty Name="teremok_address" ColumnName="teremok_address" />
+                <ScalarProperty Name="teremok_state" ColumnName="teremok_state" />
+                <ScalarProperty Name="teremok_1C" ColumnName="teremok_1C" />
+                <ScalarProperty Name="teremok_need_update" ColumnName="teremok_need_update" />
+                <ScalarProperty Name="teremok_pass" ColumnName="teremok_pass" />
+                <ScalarProperty Name="teremok_use_ARM" ColumnName="teremok_use_ARM" />
+                <ScalarProperty Name="teremok_prov" ColumnName="teremok_prov" />
+                <ScalarProperty Name="teremok_prov_rezerv" ColumnName="teremok_prov_rezerv" />
+                <ScalarProperty Name="teremok_kassa1" ColumnName="teremok_kassa1" />
+                <ScalarProperty Name="teremok_kassa2" ColumnName="teremok_kassa2" />
+                <ScalarProperty Name="teremok_kassa3" ColumnName="teremok_kassa3" />
+                <ScalarProperty Name="teremok_kassa4" ColumnName="teremok_kassa4" />
+                <ScalarProperty Name="teremok_numberkkm1" ColumnName="teremok_numberkkm1" />
+                <ScalarProperty Name="teremok_numberkkm2" ColumnName="teremok_numberkkm2" />
+                <ScalarProperty Name="teremok_numberkkm3" ColumnName="teremok_numberkkm3" />
+                <ScalarProperty Name="teremok_numberkkm4" ColumnName="teremok_numberkkm4" />
+                <ScalarProperty Name="teremok_parent" ColumnName="teremok_parent" />
+                <ScalarProperty Name="teremok_1c82" ColumnName="teremok_1c82" />
+                <ScalarProperty Name="teremok_1c82_date" ColumnName="teremok_1c82_date" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="teremok_city" ColumnName="teremok_city" />
+                <ScalarProperty Name="original_id" ColumnName="original_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Web_kkm_z_info">
+            <EntityTypeMapping TypeName="RBMModel.t_Web_kkm_z_info">
+              <MappingFragment StoreEntitySet="t_Web_kkm_z_info">
+                <ScalarProperty Name="shift_num" ColumnName="shift_num" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="terem_1c" ColumnName="terem_1c" />
+                <ScalarProperty Name="num_kkm" ColumnName="num_kkm" />
+                <ScalarProperty Name="zfile" ColumnName="zfile" />
+                <ScalarProperty Name="zdate" ColumnName="zdate" />
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="worked" ColumnName="worked" />
+                <ScalarProperty Name="lasttime_online" ColumnName="lasttime_online" />
+                <ScalarProperty Name="date_recieved" ColumnName="date_recieved" />
+                <ScalarProperty Name="zsended" ColumnName="zsended" />
+                <ScalarProperty Name="is_online" ColumnName="is_online" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_kkm">
+            <EntityTypeMapping TypeName="RBMModel.t_kkm">
+              <MappingFragment StoreEntitySet="t_kkm">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="isOnline7" ColumnName="isOnline7" />
+                <ScalarProperty Name="date_state_updated" ColumnName="date_state_updated" />
+                <ScalarProperty Name="date_confirmed" ColumnName="date_confirmed" />
+                <ScalarProperty Name="dom_suffix_confirmed" ColumnName="dom_suffix_confirmed" />
+                <ScalarProperty Name="hostname_confirmed" ColumnName="hostname_confirmed" />
+                <ScalarProperty Name="date_updated" ColumnName="date_updated" />
+                <ScalarProperty Name="domain_main_suffix" ColumnName="domain_main_suffix" />
+                <ScalarProperty Name="domain_name" ColumnName="domain_name" />
+                <ScalarProperty Name="teremok_1c" ColumnName="teremok_1c" />
+                <ScalarProperty Name="kkm_id" ColumnName="kkm_id" />
+                <ScalarProperty Name="kkm_uid" ColumnName="kkm_uid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_ZReport">
+            <EntityTypeMapping TypeName="RBMModel.t_ZReport">
+              <MappingFragment StoreEntitySet="t_ZReport">
+                <ScalarProperty Name="b" ColumnName="b" />
+                <ScalarProperty Name="z_verPO" ColumnName="z_verPO" />
+                <ScalarProperty Name="z_quantity_check" ColumnName="z_quantity_check" />
+                <ScalarProperty Name="z_svb_date_upload" ColumnName="z_svb_date_upload" />
+                <ScalarProperty Name="z_svb_load" ColumnName="z_svb_load" />
+                <ScalarProperty Name="z_num_turn" ColumnName="z_num_turn" />
+                <ScalarProperty Name="z_num_fiscal" ColumnName="z_num_fiscal" />
+                <ScalarProperty Name="z_1c_load" ColumnName="z_1c_load" />
+                <ScalarProperty Name="z_date_load" ColumnName="z_date_load" />
+                <ScalarProperty Name="z_type_id" ColumnName="z_type_id" />
+                <ScalarProperty Name="z_kkm" ColumnName="z_kkm" />
+                <ScalarProperty Name="z_dinner_return" ColumnName="z_dinner_return" />
+                <ScalarProperty Name="z_dinner" ColumnName="z_dinner" />
+                <ScalarProperty Name="z_cupon_return" ColumnName="z_cupon_return" />
+                <ScalarProperty Name="z_cupon" ColumnName="z_cupon" />
+                <ScalarProperty Name="z_card_return" ColumnName="z_card_return" />
+                <ScalarProperty Name="z_card" ColumnName="z_card" />
+                <ScalarProperty Name="z_cash_return" ColumnName="z_cash_return" />
+                <ScalarProperty Name="z_cash" ColumnName="z_cash" />
+                <ScalarProperty Name="z_total_return" ColumnName="z_total_return" />
+                <ScalarProperty Name="z_total" ColumnName="z_total" />
+                <ScalarProperty Name="z_kkm_id" ColumnName="z_kkm_id" />
+                <ScalarProperty Name="z_date" ColumnName="z_date" />
+                <ScalarProperty Name="z_file" ColumnName="z_file" />
+                <ScalarProperty Name="z_num" ColumnName="z_num" />
+                <ScalarProperty Name="z_id" ColumnName="z_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_t_ZReport_t_Teremok" TypeName="RBMModel.FK_t_ZReport_t_Teremok" StoreEntitySet="t_ZReport">
+            <EndProperty Name="t_ZReport">
+              <ScalarProperty Name="z_id" ColumnName="z_id" />
+            </EndProperty>
+            <EndProperty Name="t_Teremok">
+              <ScalarProperty Name="teremok_id" ColumnName="z_teremok_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="t_Web_ZReport">
+            <EntityTypeMapping TypeName="RBMModel.t_Web_ZReport">
+              <MappingFragment StoreEntitySet="t_Web_ZReport">
+                <ScalarProperty Name="shift_num" ColumnName="shift_num" />
+                <ScalarProperty Name="zdata" ColumnName="zdata" />
+                <ScalarProperty Name="zfile" ColumnName="zfile" />
+                <ScalarProperty Name="zdate" ColumnName="zdate" />
+                <ScalarProperty Name="date_recieved" ColumnName="date_recieved" />
+                <ScalarProperty Name="kkm_num" ColumnName="kkm_num" />
+                <ScalarProperty Name="terem_1c" ColumnName="terem_1c" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="RBMModel.t_Teremok" Width="1.5" PointX="0.75" PointY="0.75" Height="5.8263151041666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBMModel.t_Web_kkm_z_info" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833326" IsExpanded="true" />
+        <EntityTypeShape EntityType="RBMModel.t_kkm" Width="1.5" PointX="2.625" PointY="4" Height="3.1340950520833335" />
+        <EntityTypeShape EntityType="RBMModel.t_ZReport" Width="1.5" PointX="5" PointY="1.125" Height="6.2109179687500031" />
+        <AssociationConnector Association="RBMModel.FK_t_ZReport_t_Teremok" >
+          <ConnectorPoint PointX="1.5" PointY="6.7686165364583326" />
+          <ConnectorPoint PointX="1.5" PointY="6.8311165364583335" />
+          <ConnectorPoint PointX="2.5625" PointY="6.8311165364583335" />
+          <ConnectorPoint PointX="2.5625" PointY="3.9465950520833326" />
+          <ConnectorPoint PointX="4.90625" PointY="3.9465950520833326" />
+          <ConnectorPoint PointX="4.90625" PointY="4.2304589843750016" />
+          <ConnectorPoint PointX="5" PointY="4.2304589843750016" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="RBMModel.t_Web_ZReport" Width="1.5" PointX="6.875" PointY="1" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

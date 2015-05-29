@@ -1,0 +1,162 @@
+﻿public ARMWeb() {
+
+            if (StaticConstants.Web_Service_Url == "")
+            {
+                this.Url = global::RBClient.Properties.Settings.Default.RBClient_ru_teremok_msk_ARMWeb;
+            }
+            else
+            {
+                this.Url = StaticConstants.Web_Service_Url;
+            }
+
+            if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
+                this.UseDefaultCredentials = true;
+                this.useDefaultCredentialsSetExplicitly = false;
+            }
+            else {
+                this.useDefaultCredentialsSetExplicitly = true;
+            }
+        }
+
+
+		  // Win32 Constants
+private const int SB_HORZ = 0;
+private const int SB_VERT = 1;
+private const int SB_CTL  = 2;
+private const int SB_BOTH = 3;
+        private const int WM_NCCALCSIZE=0x0083;
+
+// Win32 Functions
+[DllImport("user32.dll")]
+private static extern int ShowScrollBar(IntPtr hWnd, int wBar, int bShow);
+
+protected override void WndProc(ref Message m)
+{
+    switch(m.Msg)
+    {
+        //
+        // ...
+        //
+
+        case WM_NCCALCSIZE:
+            ShowScrollBar(m.HWnd, SB_BOTH, 0 /*false*/);
+            break;
+    }
+
+    base.WndProc(ref m);
+}
+
+//BackgroundWorker bkgrw = new BackgroundWorker();
+                
+                //bkgrw.DoWork += (s3,e3) =>
+                //{
+                //    FormAddElement _form = new FormAddElement();
+                //    _form.wpfctl.txbl_Header.Text = "Выберите сотрудника";
+
+                //    List<ModelItemClass> users =
+                //        new t_Employee().Select("employee_WorkField=-1 AND Deleted=0")
+                //        .Select(a => new ModelItemClass(a)).ToList();
+
+                //    _form.wpfctl.listW_MainList.FontSize = 13;
+                //    _form.wpfctl.listW_MainList.ItemsSource = users;
+
+                //    _form.WindowState = FormWindowState.Minimized;
+                //    add_user_form = _form;
+                //};
+                //bkgrw.RunWorkerAsync();
+
+                //Thread th = new Thread(() =>
+                //{
+
+                //    FormAddElement _form = new FormAddElement();
+                //    _form.wpfctl.txbl_Header.Text = "Выберите сотрудника";
+
+                //    List<ModelItemClass> users =
+                //        new t_Employee().Select("employee_WorkField=-1 AND Deleted=0")
+                //        .Select(a => new ModelItemClass(a)).ToList();
+
+                //    _form.wpfctl.listW_MainList.FontSize = 13;
+                //    _form.wpfctl.listW_MainList.ItemsSource = users;
+
+                //    _form.WindowState = FormWindowState.Minimized;
+                //    add_user_form = _form;
+
+                //    _form.Hide();
+                    //_form.Close();
+
+                    //StaticConstants.UpdateMainInterface(this, (oo) =>
+                    //        {
+
+                    //});
+
+                //});
+                //th.ApartmentState = ApartmentState.STA;
+                //th.Start();
+
+                //return;
+
+                AsyncTaskAction1 asyncAction = new AsyncTaskAction1((o) =>
+                {
+                    StaticConstants.UpdateMainInterface(this, (oo) =>
+                        {
+
+                    //FormAddElement _form=null;
+                    //StaticConstants.UpdateMainInterface(this, (oo) =>
+                    //{
+                    //    _form = new FormAddElement();
+                    //});
+                    FormAddElement _form = new FormAddElement();
+                            _form.wpfctl.txbl_Header.Text = "Выберите сотрудника";
+
+                            List<ModelItemClass> users =
+                                new t_Employee().Select("employee_WorkField=-1 AND Deleted=0")
+                                .Select(a => new ModelItemClass(a)).ToList();
+                            
+                            _form.wpfctl.listW_MainList.FontSize = 13;
+                            _form.wpfctl.listW_MainList.ItemsSource = users;
+                            //                    add_user_form = _form;
+
+                            //_form.Show();
+                            //_form.Visible = false;
+
+                            _form.wpfctl.main_dock_panel.Children.Clear();
+                            _form.wpfctl.main_dock_panel.Children.Add(new WpfLoadingControl() { Text = "Загружаю пользователей..." });
+                            add_user_form = _form;
+                            _form.wpfctl.Loaded += (s, e1) =>
+                            {
+                                //Dispatcher.CurrentDispatcher
+                                //    .BeginInvoke(DispatcherPriority.ContextIdle, new Action(delegate()
+                                //{
+                                if (!_form.wpfctl.main_dock_panel.Children.Contains(_form.wpfctl.listW_MainList))
+                                {
+                                    _form.wpfctl.main_dock_panel.Children.Clear();
+
+                                    //_form.wpfctl.listW_MainList.Items.SourceUpdated += (s1, e2) =>
+                                    //{
+
+                                    //    
+                                    //};
+
+                                    _form.wpfctl.listW_MainList.ItemsSource = users;
+                                    _form.wpfctl.main_dock_panel.Children.Add(_form.wpfctl.listW_MainList);
+                                }
+                                //}));
+                            };
+
+                //             Dispatcher.CurrentDispatcher
+                //                    .BeginInvoke(DispatcherPriority.ContextIdle, new Action(delegate()
+                //                {
+                //                    add_user_form = _form;
+                //                }));
+                        });
+                },null);
+                asyncAction.Start();
+
+
+				/*&& add_user_form.IsHandleCreated*/)
+                {
+                    //if (add_user_form.InvokeRequired)
+                    //{
+                        
+                        //add_user_form.Invoke(new MethodInvoker(delegate
+                        //{

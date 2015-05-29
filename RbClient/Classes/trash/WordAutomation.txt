@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using Microsoft.Office.Interop.Word;
+using CustomLogger;
+
+namespace RBClient.Classes.CustomClasses
+{
+    class WordAutomation : LoggerBaseMdi
+    { }
+    //{
+    //    public static bool ConvertFromDocToHtml(FileInfo doc_file,DirectoryInfo destination)
+    //    {
+    //        try
+    //        {
+    //            object missingType = Type.Missing;
+    //            object readOnly = true;
+    //            object isVisible = false;
+    //            object documentFormat = 8;
+
+    //            object htmlFilePath = Path.Combine(destination.FullName,
+    //                doc_file.Name.Replace(doc_file.Extension, ".htm"));
+    //            string directoryPath = destination.FullName;
+
+
+
+    //            //Open the word document in background
+    //            ApplicationClass applicationclass = new ApplicationClass();
+    //            object filename = doc_file.FullName;
+    //            applicationclass.Documents.Open(ref filename,
+    //                                            ref readOnly,
+    //                                            ref missingType, ref missingType, ref missingType,
+    //                                            ref missingType, ref missingType, ref missingType,
+    //                                            ref missingType, ref missingType, ref isVisible,
+    //                                            ref missingType, ref missingType, ref missingType,
+    //                                            ref missingType, ref missingType);
+    //            applicationclass.Visible = false;
+    //            Document document = applicationclass.ActiveDocument;
+
+    //            //Save the word document as HTML file
+    //            document.SaveAs(ref htmlFilePath, ref documentFormat, ref missingType,
+    //                            ref missingType, ref missingType, ref missingType,
+    //                            ref missingType, ref missingType, ref missingType,
+    //                            ref missingType, ref missingType, ref missingType,
+    //                            ref missingType, ref missingType, ref missingType,
+    //                            ref missingType);
+
+    //            //Close the word document
+    //            document.Close(ref missingType, ref missingType, ref missingType);
+    //            return true;
+    //        }catch(Exception ex)
+    //        {
+    //            Log(ex, "ConvertFromDocToHtml error");
+    //            return false;
+    //        }
+    //    }
+    //}
+
+}

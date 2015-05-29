@@ -1,0 +1,109 @@
+﻿module File2
+
+open System
+open System.Data.SqlClient
+
+
+
+let rec SMap1 (tail:SqlDataReader) index= 
+    match index<tail.FieldCount with 
+    |false->[] 
+    |_-> 
+        let f=tail.[index].ToString()
+        List.append [f] (SMap1 tail (index+1)) 
+
+let rec PerformSqlReading1 (xreader:SqlDataReader)=
+    let xread=xreader.Read()    
+    match xread with
+    |false -> []
+    |true  -> 
+        let result=SMap1 xreader 0
+        result::(PerformSqlReading1 xreader)
+
+let getWorkingTerem =
+    let connection=new SqlConnection("Data Source=MSKTERM01;Initial Catalog=RBM;Persist Security Info=True;User ID=sa;Password=Qwerty11;MultipleActiveResultSets=True")
+    let command=new SqlCommand("select [teremok_id]
+      ,[teremok_name]
+      ,[teremok_address]
+      ,[teremok_1C]
+      ,[teremok_use_ARM]
+      ,[deleted]
+      ,[ip]
+       from get_working_terem",connection)
+    connection.Open()
+    let reader=command.ExecuteReader()
+    let arr=PerformSqlReading1 reader 
+    connection.Close()    
+    arr
+
+let execQuery conn query =
+    let connection=new SqlConnection(conn)
+    let command=new SqlCommand(query,connection)
+    connection.Open()
+    let reader=command.ExecuteReader()
+    let arr=PerformSqlReading1 reader 
+    connection.Close()    
+    arr
+
+let comparer (y:string list) (x:string list)=y.[3]=x.[1]
+
+let rec join arr_terem arr_mlist comparer=
+    let rec maketuple (h1:string list) mlist=
+        let x'=List.filter (comparer h1) mlist
+        (h1,x')
+        
+    match arr_terem with
+    |[] -> []
+    |h1::t1->
+        maketuple h1 arr_mlist::join t1 arr_mlist comparer
+
+//let rec arr=
+//    match arr with
+//        |[]->[]
+//        |h1::t1->
+//            let ((ters):string list,kkms)=h1
+//            let kkms_arr=List.map (fun (x:string list)->x.[2]) kkms |> Seq.distinct |> Seq.toList
+//           
+//            let rec return_ter_kkm (ters:string list) (kkms:string list list) kkms_arr=
+//                match kkms_arr with
+//                    |h2::t2->
+//                        (ters,List.filter (fun (x:string list)->x.[2]=h2) kkms)::return_ter_kkm ters kkms t2
+//                    |[]->[]
+//
+//            return_ter_kkm ters kkms kkms_arr::splitoverkkms t1
+
+
+
+
+
+
+
+
+let filterfunc (arr0,arr1:string list list)=
+    List.map (fun (y:string list)->y.[3]="") arr1 |> List.reduce (fun x y->x&&y)
+
+
+
+let date1=new DateTime(2015,2,15,17,0,0)
+let date2=new DateTime(2015,2,16,11,0,0)
+let conn="Data Source=MSKTERM01;Initial Catalog=RBM;Persist Security Info=True;User ID=sa;Password=Qwerty11;MultipleActiveResultSets=True"
+let query=String.Format("select * from t_Web_kkm_z_info where date_recieved > '{0}' and date_recieved < '{1}'","2015-02-15 17:00:00","2015-02-16 11:00:00")
+
+
+let wteremoks=getWorkingTerem
+let mainList=execQuery conn query
+
+
+let alljoined=join wteremoks mainList comparer
+//let all_splitted=splitoverkkms alljoined
+
+
+
+//let final_all=List.iter all_splitted List.filter filterfunc all_splitted
+
+
+let restoreho=List.filter (fun (x:string list)->x.[3]="oreho") wteremoks
+let joinedoreho=join restoreho mainList comparer
+//let splitted_oreho=splitoverkkms joinedoreho
+//let finaloreho=List.filter filterfunc splitted_oreho
+

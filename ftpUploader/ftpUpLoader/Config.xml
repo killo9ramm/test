@@ -1,0 +1,64 @@
+﻿<xml version="1.0" encoding="utf-8">
+  <root>
+    <props>
+      <!--Имя теремка 1С-->
+      <prop name="terem_name" value="ordzh" />
+      
+      <!--Настройки Ftp-->
+      <prop name="ftp_url" value="DEVPC" />
+      <prop name="ftp_user" value="ftp_user_1" />
+      <prop name="ftp_password" value="123456aA" />
+      <prop name="ftp_port" value="332" />
+
+     
+      
+      <!--Папки in out на ftp. Пример \in-->
+      <prop name="ftp_folder" value="\in" />
+      <prop name="ftp_download_folder" value="\out" />
+      
+      <!--Настройки веб-сервиса сбора информации по z-отчетам-->
+      <parm name="service_webservice_url" value="http://localhost:60257/Service1.asmx"></parm>
+      <parm name="service_webservice_url--" value="https://msk.teremok.ru:8095/armservice/Service1.asmx"></parm>
+      <parm name="service_webservice_login" value="arm_services"></parm>
+      <parm name="service_webservice_password" value="먆먀ャႴ먎먄맿ュႧႪユႵ먋먏먐Ⴝ"></parm>
+      <parm name="service_webservice_validation_by_sert" value="0"></parm>
+      
+      <!--Настройки таймаута программы-->
+        <!--Время включения-->
+      <prop name="time_start_work" value="11:50,15:00,17:30"/>
+        <!--Время в мс таймаута на каждой итерации-->
+      <prop name="uploader_rest_timeout" value="300000" />
+        <!--Интервал времени работы в мин работы после включения-->
+      <prop name="time_interval_work_min" value="15"/>
+        
+
+
+      
+      <prop name="temp_folder" value="temp" />
+      <!--Рабочая папка для получения z-отчетов-->
+      <prop name="work_folder" value="otchet" />
+      <prop name="kkm_folder--" value="c:\out" />
+      <prop name="kkm_folder" value="\\10.8.1.31\Out" />
+      
+      <!--Рабочая папка in кассы-->
+      <prop name="kkm_in_folder" value="c:\in" />
+      
+      
+      <prop name="z_perort_name_prefix" value="_X"/>
+      <prop name="use_shifts_numbers" value="true"/>
+      
+      
+      <prop name="menu_folder" value="menu" />
+      
+
+      <prop name="file_mask1" value="(?i)(\d+)_menu_tu_(.*?)_(\d+).zip"/>
+      <parm name="z_report_name_reg" value="(\S+?)_(X(\d{6})(\S+?)[.](\S+?))[.]zip"></parm>
+      <parm name="kkm_in_treport_reg" value="Касса (\d+)"></parm>
+      <parm name="check_reg" value="(?s)Чек\s*(\S+)\s+(\S+ \S+).*?[+]"></parm>
+      
+
+      
+      
+    </props>
+  </root>
+</xml>

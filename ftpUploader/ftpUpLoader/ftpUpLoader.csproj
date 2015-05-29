@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8117190B-6E54-4226-A9E2-C008049142A8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ftpUpLoader</RootNamespace>
+    <AssemblyName>ftpUpLoader</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArgumentCheckingClass.cs" />
+    <Compile Include="ArhiveManager.cs" />
+    <Compile Include="ConfigClass.cs" />
+    <Compile Include="CustomAction.cs" />
+    <Compile Include="DelegatesTypes.cs" />
+    <Compile Include="ExtensionClass.cs" />
+    <Compile Include="FtpHelperClass.cs" />
+    <Compile Include="FtpUploader.cs" />
+    <Compile Include="ftp\ControlChannel.cs" />
+    <Compile Include="ftp\FtpAsyncResult.cs" />
+    <Compile Include="ftp\FtpCollection.cs" />
+    <Compile Include="ftp\FtpDataStream.cs" />
+    <Compile Include="ftp\FtpDirectory.cs" />
+    <Compile Include="ftp\FtpEventArgs.cs" />
+    <Compile Include="ftp\FtpException.cs" />
+    <Compile Include="ftp\FtpFile.cs" />
+    <Compile Include="ftp\FtpFileTransferer.cs" />
+    <Compile Include="ftp\FtpItem.cs" />
+    <Compile Include="ftp\FtpResponse.cs" />
+    <Compile Include="ftp\FtpSession.cs" />
+    <Compile Include="ftp\SessionConnected.cs" />
+    <Compile Include="ftp\SessionDisconnected.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="LoggerBase.cs" />
+    <Compile Include="Models\Models.cs" />
+    <Compile Include="PasswordDecoder.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ReportHelper.cs" />
+    <Compile Include="Serializer.cs" />
+    <Compile Include="StaticHelperClass.cs" />
+    <Compile Include="TaskManager.cs" />
+    <Compile Include="Web References\ArmServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebServiceExchanger.cs" />
+    <Compile Include="Zipp\BZip2\BZip2.cs" />
+    <Compile Include="Zipp\BZip2\BZip2Constants.cs" />
+    <Compile Include="Zipp\BZip2\BZip2Exception.cs" />
+    <Compile Include="Zipp\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Zipp\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Zipp\Checksums\Adler32.cs" />
+    <Compile Include="Zipp\Checksums\CRC32.cs" />
+    <Compile Include="Zipp\Checksums\IChecksum.cs" />
+    <Compile Include="Zipp\Checksums\StrangeCRC.cs" />
+    <Compile Include="Zipp\Core\FileSystemScanner.cs" />
+    <Compile Include="Zipp\Core\INameTransform.cs" />
+    <Compile Include="Zipp\Core\IScanFilter.cs" />
+    <Compile Include="Zipp\Core\NameFilter.cs" />
+    <Compile Include="Zipp\Core\PathFilter.cs" />
+    <Compile Include="Zipp\Core\StreamUtils.cs" />
+    <Compile Include="Zipp\Core\WindowsPathUtils.cs" />
+    <Compile Include="Zipp\Encryption\PkzipClassic.cs" />
+    <Compile Include="Zipp\Encryption\ZipAESStream.cs" />
+    <Compile Include="Zipp\Encryption\ZipAESTransform.cs" />
+    <Compile Include="Zipp\GZip\GZIPConstants.cs" />
+    <Compile Include="Zipp\GZip\GZipException.cs" />
+    <Compile Include="Zipp\GZip\GzipInputStream.cs" />
+    <Compile Include="Zipp\GZip\GzipOutputStream.cs" />
+    <Compile Include="Zipp\Lzw\LzwConstants.cs" />
+    <Compile Include="Zipp\Lzw\LzwException.cs" />
+    <Compile Include="Zipp\Lzw\LzwInputStream.cs" />
+    <Compile Include="Zipp\SharpZipBaseException.cs" />
+    <Compile Include="Zipp\Tar\InvalidHeaderException.cs" />
+    <Compile Include="Zipp\Tar\TarArchive.cs" />
+    <Compile Include="Zipp\Tar\TarBuffer.cs" />
+    <Compile Include="Zipp\Tar\TarEntry.cs" />
+    <Compile Include="Zipp\Tar\TarException.cs" />
+    <Compile Include="Zipp\Tar\TarHeader.cs" />
+    <Compile Include="Zipp\Tar\TarInputStream.cs" />
+    <Compile Include="Zipp\Tar\TarOutputStream.cs" />
+    <Compile Include="Zipp\Zip\Compression\Deflater.cs" />
+    <Compile Include="Zipp\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="Zipp\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="Zipp\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="Zipp\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="Zipp\Zip\Compression\Inflater.cs" />
+    <Compile Include="Zipp\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="Zipp\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="Zipp\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="Zipp\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Zipp\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="Zipp\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="Zipp\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="Zipp\Zip\FastZip.cs" />
+    <Compile Include="Zipp\Zip\IEntryFactory.cs" />
+    <Compile Include="Zipp\Zip\WindowsNameTransform.cs" />
+    <Compile Include="Zipp\Zip\ZipConstants.cs" />
+    <Compile Include="Zipp\Zip\ZipEntry.cs" />
+    <Compile Include="Zipp\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Zipp\Zip\ZipException.cs" />
+    <Compile Include="Zipp\Zip\ZipExtraData.cs" />
+    <Compile Include="Zipp\Zip\ZipFile.cs" />
+    <Compile Include="Zipp\Zip\ZipHelperStream.cs" />
+    <Compile Include="Zipp\Zip\ZipInputStream.cs" />
+    <Compile Include="Zipp\Zip\ZipNameTransform.cs" />
+    <Compile Include="Zipp\Zip\ZipOutputStream.cs" />
+    <Compile Include="ZreportMaker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web References\ArmServices\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ArmServices\Service1.disco" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ArmServices\Service1.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:60257/Service1.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ArmServices\</RelPath>
+      <UpdateFromURL>http://localhost:60257/Service1.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ftpUpLoader_ArmServices_Service1</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

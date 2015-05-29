@@ -1,0 +1,18 @@
+﻿<xml version="1.0" encoding="utf-8">
+  <root>
+    <props>
+      <prop name="username" value="Администратор" />
+      <prop name="password" value=" " />
+      <prop name="killer_name" value="\\10.8.1.18\c\KillerPack\ProcessKiller.exe" />
+
+
+      <prop name="process_name" value="CCC.exe" />
+      <prop name="killer_flag" value="0" />
+      <prop name="timeout_ms" value="1000" />
+
+      <prop name="starter_flag" value="1" />
+      <prop name="starter_name" value="H:\trashH\posdisplay2\POSDisplay2\POSMonitor.exe" />
+      
+    </props>
+  </root>
+</xml>

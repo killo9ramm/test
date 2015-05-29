@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RBMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="RBMModelStoreContainer">
+          <EntitySet Name="t_Teremok" EntityType="RBMModel.Store.t_Teremok" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="t_Teremok">
+          <Key>
+            <PropertyRef Name="teremok_id" />
+          </Key>
+          <Property Name="teremok_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="teremok_name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="teremok_address" Type="varchar" MaxLength="250" />
+          <Property Name="teremok_state" Type="int" Nullable="false" />
+          <Property Name="teremok_1C" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_need_update" Type="bit" Nullable="false" />
+          <Property Name="teremok_pass" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_use_ARM" Type="bit" Nullable="false" />
+          <Property Name="teremok_prov" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_prov_rezerv" Type="varchar" MaxLength="50" />
+          <Property Name="teremok_kassa1" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_kassa2" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_kassa3" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_kassa4" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_numberkkm1" Type="int" />
+          <Property Name="teremok_numberkkm2" Type="int" />
+          <Property Name="teremok_numberkkm3" Type="int" />
+          <Property Name="teremok_numberkkm4" Type="int" />
+          <Property Name="teremok_parent" Type="nvarchar" MaxLength="50" />
+          <Property Name="teremok_1c82" Type="int" />
+          <Property Name="teremok_1c82_date" Type="datetime" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="ip" Type="nchar" MaxLength="20" />
+          <Property Name="teremok_city" Type="nchar" MaxLength="20" />
+          <Property Name="original_id" Type="int" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RBMModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="RBMEntities">
+          <EntitySet Name="t_Teremok" EntityType="RBMModel.t_Teremok" />
+        </EntityContainer>
+        <EntityType Name="t_Teremok">
+          <Key>
+            <PropertyRef Name="teremok_id" />
+          </Key>
+          <Property Name="teremok_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teremok_name" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_address" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_state" Type="Int32" Nullable="false" />
+          <Property Name="teremok_1C" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_need_update" Type="Boolean" Nullable="false" />
+          <Property Name="teremok_pass" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_use_ARM" Type="Boolean" Nullable="false" />
+          <Property Name="teremok_prov" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_prov_rezerv" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="teremok_kassa1" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_kassa2" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_kassa3" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_kassa4" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_numberkkm1" Type="Int32" />
+          <Property Name="teremok_numberkkm2" Type="Int32" />
+          <Property Name="teremok_numberkkm3" Type="Int32" />
+          <Property Name="teremok_numberkkm4" Type="Int32" />
+          <Property Name="teremok_parent" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="teremok_1c82" Type="Int32" />
+          <Property Type="DateTime" Name="teremok_1c82_date" />
+          <Property Type="Boolean" Name="deleted" />
+          <Property Type="String" Name="ip" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="teremok_city" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="original_id" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="RBMModelStoreContainer" CdmEntityContainer="RBMEntities">
+          <EntitySetMapping Name="t_Teremok">
+            <EntityTypeMapping TypeName="RBMModel.t_Teremok">
+              <MappingFragment StoreEntitySet="t_Teremok">
+                <ScalarProperty Name="original_id" ColumnName="original_id" />
+                <ScalarProperty Name="teremok_city" ColumnName="teremok_city" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="teremok_1c82_date" ColumnName="teremok_1c82_date" />
+                <ScalarProperty Name="teremok_id" ColumnName="teremok_id" />
+                <ScalarProperty Name="teremok_name" ColumnName="teremok_name" />
+                <ScalarProperty Name="teremok_address" ColumnName="teremok_address" />
+                <ScalarProperty Name="teremok_state" ColumnName="teremok_state" />
+                <ScalarProperty Name="teremok_1C" ColumnName="teremok_1C" />
+                <ScalarProperty Name="teremok_need_update" ColumnName="teremok_need_update" />
+                <ScalarProperty Name="teremok_pass" ColumnName="teremok_pass" />
+                <ScalarProperty Name="teremok_use_ARM" ColumnName="teremok_use_ARM" />
+                <ScalarProperty Name="teremok_prov" ColumnName="teremok_prov" />
+                <ScalarProperty Name="teremok_prov_rezerv" ColumnName="teremok_prov_rezerv" />
+                <ScalarProperty Name="teremok_kassa1" ColumnName="teremok_kassa1" />
+                <ScalarProperty Name="teremok_kassa2" ColumnName="teremok_kassa2" />
+                <ScalarProperty Name="teremok_kassa3" ColumnName="teremok_kassa3" />
+                <ScalarProperty Name="teremok_kassa4" ColumnName="teremok_kassa4" />
+                <ScalarProperty Name="teremok_numberkkm1" ColumnName="teremok_numberkkm1" />
+                <ScalarProperty Name="teremok_numberkkm2" ColumnName="teremok_numberkkm2" />
+                <ScalarProperty Name="teremok_numberkkm3" ColumnName="teremok_numberkkm3" />
+                <ScalarProperty Name="teremok_numberkkm4" ColumnName="teremok_numberkkm4" />
+                <ScalarProperty Name="teremok_parent" ColumnName="teremok_parent" />
+                <ScalarProperty Name="teremok_1c82" ColumnName="teremok_1c82" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="RBMModel" ZoomLevel="97">
+        <EntityTypeShape EntityType="RBMModel.t_Teremok" Width="1.5" PointX="0.75" PointY="0.75" Height="4.8648079427083326" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

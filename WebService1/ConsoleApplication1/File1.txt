@@ -1,0 +1,1065 @@
+﻿module File2
+open System
+open System.IO
+
+type 't btree=
+    |Node of 't * 't btree * 't btree
+    |Nil
+
+let newNode sym=
+    Node(sym,Nil,Nil)
+
+let rec addtoTree tree x=
+    match tree with
+        |Nil->
+            let p=Node(x,Nil,Nil)
+            p
+        |Node(n,lt,rt)->
+            match n with
+                | n when x>n ->
+                    let p=Node(n,lt,addtoTree rt x)                    
+                    p
+                | n when x<n ->                        
+                    Node(n,addtoTree lt x, rt)
+                |n when x=n->
+                    Node(n,lt,rt)           
+
+
+let rec insertToNode sym node = 
+    match node with 
+        |Nil-> 
+            Node(sym,Nil,Nil) 
+        |Node(a,Nil,Nil)-> 
+            Node(sym,newNode a,Nil) 
+        |Node(a,lt,Nil)-> 
+            Node(a,lt,newNode sym) 
+        |Node(a,lt,rt)-> 
+            Node(a,lt,insertToNode sym rt) 
+ 
+let parse func expr =
+    let rec rse expr1 node=
+          match expr1 with
+          |h::t->
+            let nod=func h node
+            rse t nod
+          |[]->node
+    rse expr Nil
+
+let parse1 func expr nod=
+    let rec rse expr1 node=
+          match expr1 with
+          |h::t->
+            let nod=func h node
+            rse t nod
+          |[]->node
+    rse expr nod
+
+ 
+let expr=["1";"+";"2";"+";"3";"+";"6";"-";"6";"+";"9";"+";"10";"-";"11";"+";"12"] 
+let infix_tree=parse insertToNode expr 
+
+
+let oper=["+";"-";"*";"/"] 
+let inlist list' a'= 
+    list' |> List.exists (fun el->el=a') 
+ 
+let parsePosfix expr0= 
+    let revexpr=List.rev expr 
+    let revexpr1=List.filter (fun x->inlist oper x) revexpr 
+    let revexpr2=List.filter (fun x->(inlist revexpr1 x)=false) expr
+ 
+    let rec insertToNodePost sym node = 
+        if(inlist oper sym)then 
+             match node with 
+                |Nil-> 
+                    newNode (Some sym) 
+                |Node(None,lt',rt')-> 
+                    Node(Some sym,lt',rt')     
+                |Node(a,lt',rt')-> 
+                    Node(a,lt',insertToNodePost sym rt') 
+        else 
+            printfn "%A" node 
+            match node with 
+                |Nil-> 
+                    printfn "%A" node 
+                    node 
+                |Node(a,Nil,Nil)-> 
+                    Node(a,newNode (Some sym),Nil) 
+                |Node(a,lt',Nil)-> 
+                    Node(a,lt',newNode (Some sym)) 
+                |Node(a,Nil,rt')-> 
+                    Node(a,newNode (Some sym),rt') 
+                |Node(a,lt',rt')-> 
+                    Node(a,lt',insertToNodePost sym rt') 
+    let node=parse insertToNodePost revexpr1 
+    parse1 insertToNodePost revexpr2 node 
+ 
+let expr=["2";"3";"5";"6";"+";"+";"+"] 
+let postfix_tree=parsePosfix expr 
+
+let rec insertToNodePref sym node = 
+    if(inlist oper sym)then 
+            match node with 
+            |Nil-> 
+                Node(sym,Nil,Nil) 
+            |Node(a,lt,Nil)-> 
+                Node(a,lt,newNode sym) 
+            |Node(a,lt,rt)-> 
+                Node(a,lt,insertToNodePref sym rt) 
+    else    
+        match node with 
+            |Node(a,Nil,Nil)-> 
+                Node(a,newNode sym,Nil) 
+            |Node(a,lt,Nil)-> 
+                Node(a,lt,newNode sym) 
+            |Node(a,lt,rt)-> 
+                Node(a,lt,insertToNodePref sym rt) 
+ 
+let expr=["+";"2";"+";"3";"+";"5";"6"] 
+let prefix_tree=parse insertToNodePref expr 
+
+
+prefix_tree
+postfix_tree
+infix_tree
+
+let print_tree tree=
+    let rec print pn tree=
+        match tree with
+//            |pn1->
+//                match pn1 with
+            |Node(a0,Nil,Nil)->
+                printfn "1"
+                printfn "parent %A subtree %A" (pn|>head) (tree|>head)
+                print pn (pn|>right)
+            |Node(a0,lt,rt)->
+                printfn "4"
+                printfn "parent %A subtree %A" (pn|>head) (tree|>head)
+                print tree lt
+            |Nil->printfn "end"
+
+
+////        //|Node(a0,lt,Nil)->
+//            printfn "2"
+//            print tree lt
+//        //|Node(a0,Nil,rt)->
+//            printfn "3"
+//            print tree rt
+        
+    match tree with
+    |Nil-> printfn "Nil"
+    |Node(a,lt,rt)->
+        print tree lt
+
+print_tree prefix_tree
+
+let make_action sym x y=
+    match sym with
+    |"+"->x+y
+    |"*"->x*y
+    |"/"->x/y
+    |"-"->x-y
+
+
+let StackTake stack= 
+    match stack.queue1 with 
+    |[]->None 
+    |x::y-> 
+        stack.queue1 <- y 
+        Some x 
+ 
+let StackPut stack x= 
+    stack.queue1<-x::stack.queue1 
+ 
+type Stack =  
+    {mutable queue1 : int list; 
+    mutable queue2 : int list;} 
+     
+type Stack with    
+   member this.Put = StackPut this  
+   member this.Take = StackTake this 
+ 
+let s={queue1=[];queue2=[]} 
+
+let test sym x =make_action sym x
+
+test "+" 3 4
+
+let head node=
+    match node with
+    |Node(a,lt,rt)->a
+
+let left node=
+    match node with
+    |Node(a,lt,rt)->lt
+
+let right node=
+    match node with
+    |Node(a,lt,rt)->rt
+
+
+let ofsome a=
+    match a with
+    |Some b->b
+
+let calculate_tree tree0=
+    match tree0 with
+    |Node(a1,Node(a2,lt2,rt2),rt1)->
+        
+let inlist list' a'=  
+    list' |> List.exists (fun el->el=a')         
+let oper=["+";"-";"*";"/"] 
+
+let test=Node(Some 1,Node(Some 1,Nil,Nil),Nil)
+test|>head|>ofsome
+
+oper.Length % 2
+List.
+
+let gethalf arr=
+    let len=arr.Length/2    
+    List.
+
+let arr_split2 (arr: a' list)=
+    let len=arr.Length%2    
+    if(len=0)then
+        
+    else
+        raise (System.ArgumentException("Divisor cannot be zero!"))
+
+
+
+
+
+
+let rec insertToNodePref1 sym node=
+    match node with    
+    |Nil->
+        newNode (Some sym)
+    |Node(a0,Nil,Nil)->
+        Node(a0,newNode (Some sym),Nil)
+    |Node(a0,lt0,Nil)->
+        let a1=head lt0
+        if inlist oper (ofsome a1) then
+            Node(a0,Node(a1,newNode(Some sym),Nil),Nil)
+        else
+            Node(a0,lt0,newNode(Some sym))
+
+
+    |Node(a0,lt0,rt0)->
+        if inlist oper (ofsome head lt0)
+
+        
+            
+        
+
+let prefix_tre1=parse insertToNodePref expr 
+
+let a=Node(1,Nil,Nil)
+let b=addtoTree a 2
+let c=addtoTree b 0
+let d=addtoTree c 3
+let e=addtoTree d 1
+let f=addtoTree e 1
+
+
+let oper=["+";"-";"*";"/"]
+
+let expr=["1";"+";"2";"+";"3";"+";"6";"-";"6";"+";"9";"+";"10";"-";"11";"+";"12"]
+expr.Length
+
+let inList list' a'=
+    list' |> List.exists (fun el->el=a')
+
+let rec insertToNode sym node =
+    match node with
+        |Nil->
+            Node(sym,Nil,Nil)
+        |Node(a,Nil,Nil)->
+            Node(sym,newNode a,Nil)
+        |Node(a,lt,Nil)->
+            Node(a,lt,newNode sym)
+        |Node(a,lt,rt)->
+            Node(a,lt,insertToNode sym rt)
+
+let parse func expr =
+    let rec rse expr1 node=
+          match expr1 with
+          |h::t->
+            let nod=func h node
+            rse t nod
+          |[]->node
+    rse expr Nil
+
+let parse1 func expr nod=
+    let rec rse expr1 node=
+          match expr1 with
+          |h::t->
+            let nod=func h node
+            rse t nod
+          |[]->node
+    rse expr nod
+
+let parse func expr = 
+    let rec rse expr1 node= 
+          match expr1 with 
+          |h::t-> 
+            let nod=func h node 
+            rse t nod 
+          |[]->node 
+    rse expr Nil
+
+let expr=["1";"+";"2";"+";"3";"+";"6";"-";"6";"+";"9";"+";"10";"-";"11";"+";"12"]
+let expr=["1";"+";"2";"+";"3"]
+parse insertToNode expr
+
+let oper=["+";"-";"*";"/"]
+let inlist list' a'=
+    list' |> List.exists (fun el->el=a')
+
+let newNode sym=
+    Node(sym,Nil,Nil)
+
+let parsePosfix expr0=
+    let revexpr=List.rev expr
+    let revexpr1=List.filter (fun x->inlist oper x) revexpr
+    let revexpr2=List.filter (fun x->(inlist revexpr1 x)=false) expr
+
+    let rec insertToNodePost sym node =
+        if(inlist oper sym)then
+             match node with
+                |Nil->
+                    newNode (Some sym)
+                |Node(None,lt',rt')->
+                    Node(Some sym,lt',rt')    
+                |Node(a,lt',rt')->
+                    Node(a,lt',insertToNodePost sym rt')
+        else
+            printfn "%A" node
+            match node with
+                |Nil->
+                    printfn "%A" node
+                    node
+                |Node(a,Nil,Nil)->
+                    Node(a,newNode (Some sym),Nil)
+                |Node(a,lt',Nil)->
+                    Node(a,lt',newNode (Some sym))
+                |Node(a,Nil,rt')->
+                    Node(a,newNode (Some sym),rt')
+                |Node(a,lt',rt')->
+                    Node(a,lt',insertToNodePost sym rt')
+    let node=parse insertToNodePost revexpr1
+    parse1 insertToNodePost revexpr2 node
+
+let a=insertToNodePost "+" Nil
+let b=insertToNodePost "+" a
+let c=insertToNodePost "+" b
+let d=insertToNodePost "2" c 
+let e=insertToNodePost "3" d
+let f=insertToNodePost "5" e
+let g=insertToNodePost "6" f
+let e=addtoTree d 1
+let f=addtoTree e 1
+
+parse insertToNodePost expr
+let expr=["+";"2";"+";"3";"+";"5";"6"]
+let expr=["2";"3";"5";"6";"+";"+";"+"]
+
+parsePosfix expr
+
+
+
+
+
+
+
+
+
+type STA=St of string
+let b=St("asd")
+match b with St(c)->c
+let b=St(c)
+c
+
+
+type 't tree = Leaf of 't | Node of 't*('t tree list)
+
+type tem=
+    |St of string
+    |In of int
+
+let a = St
+
+let a = Node (1,Nil,Nil)
+let b = Node (2,Nil,a) 
+
+let aa=Leaf(1)
+let bb=Node(2,[aa;aa])
+
+type 't tree = Leaf of 't | Node of 't*('t tree list)
+let a=new DirectoryInfo("H:\C\ATI\Support\9_3_vista64_win7_64_dd_ccc_wdm_enu")
+
+
+let rec createDirTree (a:DirectoryInfo)=     
+    let dirs=a.GetDirectories() |> Array.toList
+    let ind=dirs.Length
+    if ind=0 then
+        Leaf(a.Name)
+    else
+        Node(a.Name , dirs|> List.map createDirTree)
+
+createDirTree a
+
+type ActiveState = { UnpaidItems : CartItem list; } 
+type ActiveState with 
+   member this.Add = addToActiveState this  
+   member this.Remove = removeFromActiveState this  
+   member this.Pay = payForActiveState this  
+
+
+type Widget(initialState:int) = 
+    let mutable state = initialState
+    member x.x_state = initialState
+    member x.Hello = "hi"
+    member x.HasBeenPoked = (state <> 0)
+
+
+type Stack (ilist:'t list)=
+    let mutable lis=ilist
+    let mutable myInternalValue=0
+    member this._list with get () = lis
+    member this._list with set (value) = lis <- value
+    member this.MyReadWriteProperty with get () = myInternalValue
+    member this.MyReadWriteProperty with set (value) = myInternalValue <- value
+    member x.Hello = "hi"
+    member x.HasBeenPoked = (x._list.Length <> 0)    
+    static member myStaticValue=0
+    static member MyStaticProperty
+        with get() = myStaticValue
+        and set(value) = myStaticValue <- value
+
+        
+let a=Stack([])
+a.HasBeenPoked
+a._list<-[1]
+a.MyReadWriteProperty<-1
+
+
+
+//type Stack1 =
+//  member _list : int list
+//  new (t) = {
+//    _list = t
+//  }
+
+type Book =
+  val title : string
+
+  new (t) = {
+    title = t
+  }
+
+//
+//type MyClass(property1 : int) =
+//    member val Property1 = property1
+//    member val Property2 = "" with get, set
+
+type MyClass() =
+    let random  = new System.Random()
+    member AutoProperty = random.Next() with get, set
+    member this.ExplicitProperty = random.Next()
+
+let class1 = new MyClass()
+printfn "class1.AutoProperty = %d" class1.AutoProperty
+printfn "class1.AutoProperty = %d" class1.AutoProperty
+printfn "class1.ExplicitProperty = %d" class1.ExplicitProperty
+printfn "class1.ExplicitProperty = %d" class1.ExplicitProperty
+
+type Book =
+  val title : string
+  val author : string
+  val publishDate : DateTime
+
+  new (t, a, pd) = {
+    title = t
+    author = a
+    publishDate = pd
+  }
+
+
+type Expr = 
+  | Num of int
+  | Add of Expr * Expr
+  | Mul of Expr * Expr
+  | Var of string
+
+type Book =
+  val title : string
+  val author : string
+  val publishDate : DateTime
+
+  new (t, a, pd) = {
+    title = t
+    author = a
+    publishDate = pd
+  }
+
+type Card = { Name  : string;
+              Phone : string;
+              Ok    : bool }
+
+/// Двумерный массив
+type Vector2D(dx:float, dy:float) = 
+    // Предварительно вычисленная длина вектора
+    let length = sqrt(dx*dx + dy*dy)
+    /// Смещение по оси X
+    member v.DX = dx
+    /// Смещение по оси Y
+    member v.DY = dy
+    /// Длина вектора
+    member v.Length = length
+    // Смещение вектора на константу
+    member v.Scale(k) = Vector2D(k*dx, k*dy)
+
+type Widget(initialState:int) = 
+    /// Внутреннее состояние элемента интерфейса
+    let mutable state = initialState
+
+    member x.x_state = initialState
+
+    member x.Hello = "hi"
+    // Реализация интерфейса IPeekPoke
+
+    member x.HasBeenPoked = (state <> 0)
+
+
+
+
+
+
+
+
+
+type CartItem = string    // placeholder for a more complicated type
+
+type EmptyState = NoItems // don't use empty list! We want to
+                          // force clients to handle this as a 
+                          // separate case. E.g. "you have no 
+                          // items in your cart"
+
+type ActiveState = { UnpaidItems : CartItem list; }
+type PaidForState = { PaidItems : CartItem list; 
+                      Payment : decimal}
+
+type Cart = 
+    | Empty of EmptyState 
+    | Active of ActiveState 
+    | PaidFor of PaidForState 
+
+// =============================
+// operations on empty state
+// =============================
+let addToEmptyState item = 
+   // returns a new Active Cart
+   Cart.Active {UnpaidItems=[item]}
+
+// =============================
+// operations on active state
+// =============================
+let addToActiveState state itemToAdd = 
+   let newList = itemToAdd :: state.UnpaidItems
+   Cart.Active {state with UnpaidItems=newList }
+
+let removeFromActiveState state itemToRemove = 
+   let newList = state.UnpaidItems 
+                 |> List.filter (fun i -> i<>itemToRemove)
+                
+   match newList with
+   | [] -> Cart.Empty NoItems
+   | _ -> Cart.Active {state with UnpaidItems=newList} 
+
+let payForActiveState state amount = 
+   // returns a new PaidFor Cart
+   Cart.PaidFor {PaidItems=state.UnpaidItems; Payment=amount}
+
+
+type EmptyState with
+   member this.Add = addToEmptyState 
+
+type ActiveState with
+   member this.Add = addToActiveState this 
+   member this.Remove = removeFromActiveState this 
+   member this.Pay = payForActiveState this 
+
+let addItemToCart cart item =  
+   match cart with
+   | Empty state -> state.Add item
+   | Active state -> state.Add item
+   | PaidFor state ->  
+       printfn "ERROR: The cart is paid for"
+       cart
+
+let removeItemFromCart cart item =  
+   match cart with
+   | Empty state -> 
+      printfn "ERROR: The cart is empty"
+      cart   // return the cart 
+   | Active state -> 
+      state.Remove item
+   | PaidFor state ->  
+      printfn "ERROR: The cart is paid for"
+      cart   // return the cart
+
+let displayCart cart  =  
+   match cart with
+   | Empty state -> 
+      printfn "The cart is empty"   // can't do state.Items
+   | Active state -> 
+      printfn "The cart contains %A unpaid items"
+                                                state.UnpaidItems
+   | PaidFor state ->  
+      printfn "The cart contains %A paid items. Amount paid: %f"
+                                    state.PaidItems state.Payment
+
+type Cart with
+   static member NewCart = Cart.Empty NoItems
+   member this.Add = addItemToCart this 
+   member this.Remove = removeItemFromCart this 
+   member this.Display = displayCart this 
+
+let emptyCart = Cart.NewCart
+printf "emptyCart="; emptyCart.Display
+
+let cartA = emptyCart.Add "A"
+printf "cartA="; cartA.Display
+
+let cartAB = cartA.Add "B"
+printf "cartAB="; cartAB.Display
+
+let cartB = cartAB.Remove "A"
+printf "cartB="; cartB.Display
+
+let emptyCart2 = cartB.Remove "B"
+printf "emptyCart2="; emptyCart2.Display
+
+let emptyCart3 = emptyCart2.Remove "B"    //error
+printf "emptyCart3="; emptyCart3.Display
+
+
+//  try to pay for cartA
+let cartAPaid = 
+    match cartA with
+    | Empty _ | PaidFor _ -> cartA 
+    | Active state -> state.Pay 100m
+printf "cartAPaid="; cartAPaid.Display
+
+
+//  try to pay for emptyCart
+let emptyCartPaid = 
+    match emptyCart with
+    | Empty _ | PaidFor _ -> emptyCart
+    | Active state -> state.Pay 100m
+printf "emptyCartPaid="; emptyCartPaid.Display
+
+
+//  try to pay for cartAB 
+let cartABPaid = 
+    match cartAB with
+    | Empty _ | PaidFor _ -> cartAB // return the same cart
+    | Active state -> state.Pay 100m
+
+//  try to pay for cartAB again
+let cartABPaidAgain = 
+    match cartABPaid with
+    | Empty _ | PaidFor _ -> cartABPaid  // return the same cart
+    | Active state -> state.Pay 1000m
+
+
+match cartABPaid with
+    | Empty state -> state.Pay 100m
+    | PaidFor state -> state.Pay 100m
+    | Active state -> state.Pay 100m
+
+// define some measures
+[<Measure>] 
+type cm
+
+[<Measure>] 
+type inches=
+ // add a conversion function
+   static member toCm(value : float<inches>) : float<cm> = 
+      value * 2.7<cm/inches>
+
+let k=10.0<inches>
+inches.toCm(k)
+
+[<Measure>] 
+type feet =
+   // add a conversion function
+   static member toInches(feet : float<feet>) : float<inches> = 
+      feet * 12.0<inches/feet>
+
+// define some values
+let meter = 100.0<cm>
+let yard = 3.0<feet>
+
+//convert to different measure
+let yardInInches = feet.toInches(yard)
+
+// can't mix and match!
+yard + meter
+
+// now define some currencies
+[<Measure>] 
+type GBP
+
+[<Measure>] 
+type USD
+
+let gbp10 = 10.0<GBP>
+let usd10 = 10.0<USD>
+gbp10 + gbp10             // allowed: same currency
+gbp10 + usd10             // not allowed: different currency
+gbp10 + 1.0               // not allowed: didn't specify a currency
+gbp10 + 1.0<_>            // allowed using wildcard
+
+//open System
+//
+//let add2 x = x + 2
+//let mult3 x = x * 3
+//let square x = x * x
+//
+//// test
+//[1..10] |> List.map add2 |> printfn "%A"
+//[1..10] |> List.map mult3 |> printfn "%A"
+//[1..10] |> List.map square |> printfn "%A" 
+//
+//// new composed functions
+//let add2ThenMult3 = add2 >> mult3
+//let mult3ThenSquare = mult3 >> square 
+//
+//add2ThenMult3 5
+//mult3ThenSquare 5
+//[1..10] |> List.map add2ThenMult3 |> printfn "%A"
+//[1..10] |> List.map mult3ThenSquare |> printfn "%A"
+//
+//
+//let logMsg msg x = printf "%s%i" msg x; x     //without linefeed 
+//let logMsgN msg x = printfn "%s%i" msg x; x   //with linefeed
+//
+//// new composed function with new improved logging!
+//let mult3ThenSquareLogged = 
+//   logMsg "before=" 
+//   >> mult3 
+//   >> logMsg " after mult3=" 
+//   >> square
+//   >> logMsgN " result=" 
+//
+//// test
+//mult3ThenSquareLogged 5
+//[1..10] |> List.map mult3ThenSquareLogged //apply to a whole list
+//
+//
+//let listOfFunctions = [
+//   mult3; 
+//   square;
+//   add2;
+//   logMsgN "result=";
+//   ]
+//
+//// compose all functions in the list into a single one
+//let allFunctions = List.reduce (>>) listOfFunctions 
+//
+////test
+//allFunctions 5
+//
+//// set up the vocabulary
+//type DateScale = Hour | Hours | Day | Days | Week | Weeks
+//type DateDirection = Ago | Hence
+//
+//// define a function that matches on the vocabulary
+//let getDate interval scale direction =
+//    let absHours = match scale with
+//                   | Hour | Hours -> 1 * interval
+//                   | Day | Days -> 24 * interval
+//                   | Week | Weeks -> 24 * 7 * interval
+//    let signedHours = match direction with
+//                      | Ago -> -1 * absHours 
+//                      | Hence ->  absHours 
+//    System.DateTime.Now.AddHours(float signedHours)
+//
+//// test some examples
+//let example1 = getDate 5 Days Ago
+//let example2 = getDate 1 Hour Hence
+//
+//
+//
+//
+//type FluentShape = {
+//    label : string; 
+//    color : string; 
+//    onClick : FluentShape->FluentShape // a function type
+//    }
+//
+//let defaultShape = 
+//    {label=""; color=""; onClick=fun shape->shape}
+//
+//let click shape = 
+////    shape.color
+//    shape.onClick shape
+//
+//let display shape = 
+//    printfn "My label=%s and my color=%s" shape.label shape.color
+//    shape   //return same shape
+//
+//let setLabel label shape = 
+//   {shape with FluentShape.label = label}
+//
+//let setColor color shape = 
+//   {shape with FluentShape.color = color}
+//
+////add a click action to what is already there
+//let appendClickAction action shape = 
+//   {shape with FluentShape.onClick = shape.onClick >> action}
+//
+//// Compose two "base" functions to make a compound function.
+//let setRedBox = setColor "red" >> setLabel "box" 
+//
+//// Create another function by composing with previous function.
+//// It overrides the color value but leaves the label alone.
+//let setBlueBox = setRedBox >> setColor "blue"  
+//
+//// Make a special case of appendClickAction
+//let changeColorOnClick color = appendClickAction (setColor color) 
+//
+////setup some test values
+//let redBox = defaultShape |> setRedBox
+//let blueBox = defaultShape |> setBlueBox 
+//
+//// create a shape that changes color when clicked
+//redBox 
+//    |> display
+//    |> changeColorOnClick "green"
+//    |> click
+//    |> display  // new version after the click
+//
+//// create a shape that changes label and color when clicked
+//blueBox 
+//    |> display
+//    |> appendClickAction (setLabel "box2" >> setColor "green")  
+//    |> click
+//    |> display  // new version after the click
+//
+//let rainbow =
+//    ["red";"orange";"yellow";"green";"blue";"indigo";"violet"]
+//
+//let showRainbow = 
+//    let setColorAndDisplay color = setColor color >> display 
+//    rainbow 
+//    |> List.map setColorAndDisplay 
+//    |> List.reduce (>>)
+//
+//// test the showRainbow function
+//defaultShape |> showRainbow 
+//
+//
+//
+//type 't btree= 
+//    |Node of 't * 't btree * 't btree
+//    |Nil
+//
+//type queue = 
+//    let mutable list=[]
+//    /// Смещение по оси X
+//    member v.Put(x) =
+//        v.list<-v.list::x
+//    /// Смещение по оси Y
+//    member v.Take = 
+//        printfn "sda"
+//    
+//    
+//    
+//
+//let ss (a:'t)=
+//    printfn "%A" a
+//
+//ss ["12","12"]
+//
+//
+//
+//let capitals =
+//    [("Australia", "Canberra"); ("Canada", "Ottawa"); ("China", "Beijing");
+//        ("Denmark", "Copenhagen"); ("Egypt", "Cairo"); ("Finland", "Helsinki");
+//        ("France", "Paris"); ("Germany", "Berlin"); ("India", "New Delhi");
+//        ("Japan", "Tokyo"); ("Mexico", "Mexico City"); ("Russia", "Moscow");
+//        ("Slovenia", "Ljubljana"); ("Spain", "Madrid"); ("Sweden", "Stockholm");
+//        ("Taiwan", "Taipei"); ("USA", "Washington D.C.")]
+//    |> Map.ofList
+// 
+//let rec main cap =
+//    match cap with
+//    | "q" -> printfn "Bye bye"
+//    | country ->
+//        match capitals.TryFind(country) with
+//        | Some(capital) ->printfn "The capital of %A is %A\n" country capital
+//        | None -> printfn "Country not found.\n"
+//        
+// 
+//let arr=[1..10]
+//
+//let part (func:int ->bool) (arr:int list)=
+//    let rec part' (func:int->bool) (arr:int list) ((h':int list),(t':int list))=
+//        match arr with
+//        |[]->([],[])
+//        |h1::t1->
+//            let f' func h1=
+//                if func h1 then
+//                    (h1::h',t')
+//                else
+//                    (h',h1::t')
+//            part' func t1 (f' func h1) 
+//    part' func arr ([],[])
+//
+//let part1 (func) (arr)=
+//    let rec part' (func) (arr) ((h'),(t'))=
+//        match arr with
+//        |[]->(List.rev h',List.rev t')
+//        |h1::t1->
+//            let f' func h1=
+//                if func h1 then
+//                    (h1::h',t')
+//                else
+//                    (h',h1::t')
+//            part' func t1 (f' func h1) 
+//    part' func arr ([],[])
+//
+//let funci x=x%2=0
+//
+//let (x:int list,y:int list)=part1 funci arr
+//
+//List.partition funci arr
+//
+//let arr=[1;2;3;4;5;6;7;8;9]
+//
+//List.scan (fun x y->x*y) 1 arr
+//
+//let scan1 func accum arr =
+//    let rec scan' func accum arr=
+//        match arr with
+//        |[]->[]
+//        |h::t->
+//            let acc=func accum h
+//            acc::(scan' func acc t)
+//    accum::scan' func accum arr
+//
+//scan1 (fun x y->x*y) 1 arr
+//
+//let arr=
+//[[0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
+//[0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
+//[0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
+//[0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0];
+//[0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0]]
+//
+//let invert x=
+//    if x=0 then
+//        1
+//    else
+//        0
+//
+//arr |> List.rev |> List.map List.rev 
+//
+//List.map List.rev arr
+//
+//arr |> List.rev
+//
+//
+//
+//// define a "union" of two different alternatives
+//type Result<'a, 'b> = 
+//    | Success of 'a  // 'a means generic type. The actual type
+//                     // will be determined when it is used.
+//    | Failure of 'b  // generic failure type as well
+//
+//
+//// define all possible errors
+//type FileErrorReason = 
+//    | FileNotFound of string
+//    | UnauthorizedAccess of string * System.Exception
+//
+//// define a low level function in the bottom layer
+//let performActionOnFile action filePath =
+//   try
+//      //open file, do the action and return the result
+//      use sr = new System.IO.StreamReader(filePath:string)
+//      let result = action sr  //do the action to the reader
+//      sr.Close()
+//      Success (result)        // return a Success
+//   with      // catch some exceptions and convert them to errors
+//      | :? System.IO.FileNotFoundException as ex 
+//          -> Failure (FileNotFound filePath)      
+//      | :? System.Security.SecurityException as ex 
+//          -> Failure (UnauthorizedAccess (filePath,ex))  
+//      // other exceptions are unhandled
+//
+//// a function in the middle layer
+//let middleLayerDo action filePath = 
+//    let fileResult = performActionOnFile action filePath
+//    // do some stuff
+//    fileResult //return
+//
+//// a function in the top layer
+//let topLayerDo action filePath = 
+//    let fileResult = middleLayerDo action filePath
+//    // do some stuff
+//    fileResult //return
+//
+///// get the first line of the file
+//let printFirstLineOfFile filePath = 
+//    let fileResult = topLayerDo (fun fs->fs.ReadLine()) filePath
+//
+//    match fileResult with
+//    | Success result -> 
+//        // note type-safe string printing with %s
+//        printfn "first line is: '%s'" result   
+//    | Failure reason -> 
+//       match reason with  // must match EVERY reason
+//       | FileNotFound file -> 
+//           printfn "File not found: %s" file
+//       | UnauthorizedAccess (file,_) -> 
+//           printfn "You do not have access to the file: %s" file
+//
+///// get the length of the text in the file
+//let printLengthOfFile filePath = 
+//   let fileResult = 
+//     topLayerDo (fun fs->fs.ReadToEnd().Length) filePath
+//
+//   match fileResult with
+//   | Success result -> 
+//      // note type-safe int printing with %i
+//      printfn "length is: %i" result       
+//   | Failure _ -> 
+//      printfn "An error happened but I don't want to be specific"
+//
+///// write some text to a file
+//let writeSomeText filePath someText = 
+//    use writer = new System.IO.StreamWriter(filePath:string)
+//    writer.WriteLine(someText:string)
+//    writer.Close()
+//
+//let goodFileName = "good.txt"
+//let badFileName = "bad.txt"
+//
+//writeSomeText goodFileName "hello"
+//
+//printFirstLineOfFile goodFileName 
+//printLengthOfFile goodFileName 
+//
+//printFirstLineOfFile badFileName 
+//printLengthOfFile badFileName 
+//
+//let returnfilepath filePath = 
+//    let fileinfo = new System.IO.FileInfo(filePath:string)
+//    fileinfo.FullName    
+//    
+//returnfilepath goodFileName

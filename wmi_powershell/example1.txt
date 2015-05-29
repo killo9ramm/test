@@ -1,0 +1,4 @@
+ [System.Net.Dns]::GetHostByName(($env:computerName))
+ [System.Net.Dns] | Get-Member -Static
+ 
+Get-WmiObject -Class Win32_Product | Select-Object -Property Name

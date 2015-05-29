@@ -1,0 +1,266 @@
+﻿<UserControl x:Class="RBClient.WPF.UserControls.MarOtchCentarPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:Uc="clr-namespace:RBClient.WPF.UserControls"
+             MinHeight="600" MinWidth="800"
+             Unloaded="UserControl_Unloaded"
+             >
+
+    <UserControl.Resources>
+        
+            <ResourceDictionary>
+                <Uc:WidthConverter x:Key="WidthConverter_"/>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../../Resources/ButtonStyles.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+
+    </UserControl.Resources>
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF72BAF2" Offset="0"/>
+            <GradientStop Color="#FFFDFFFD" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+<ScrollViewer VerticalScrollBarVisibility="Auto">
+    <DockPanel>
+        <!-- шапка 11-->
+        <DockPanel DockPanel.Dock="Top" Height="30">
+            
+            <Button DockPanel.Dock="Right" Margin="0,0,6,0" Width="150" Content="Отправить документ" Style="{StaticResource wpf_button}" Click="Button_Click" Visibility="Collapsed"/>
+            <TextBlock  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold">Информация о сменах сотрудника</TextBlock>
+        </DockPanel>
+
+        <Uc:WinExpander DockPanel.Dock="Top" x:Name="Win_Expander_base1">
+
+        </Uc:WinExpander>
+        <Expander DockPanel.Dock="Top" Header="Панель смен" Name="Expander_base1">
+            <DockPanel LastChildFill="True">
+
+                <!-- шапка 12-->
+                <DockPanel DockPanel.Dock="Top" LastChildFill="True" Height="100">
+                    <DockPanel Margin="5,0,0,0" DockPanel.Dock="Bottom" LastChildFill="False" Height="30">
+                        <Button DockPanel.Dock="Left" Width="135" ToolTip="Добавить пользователя в таблицу смен"  Content="Добавить польз. " Name="button_addUser" Click="button_addUser_Click" Style="{StaticResource wpf_add_button_image_hor}"/>
+                        <Button DockPanel.Dock="Left" Width="125" ToolTip="Удалить пользователя" Content="Удалить польз. " Name="button_delUser" Click="button_delUser_Click"  Style="{StaticResource wpf_rem_button_image_hor}" />
+                        <Button DockPanel.Dock="Left" Width="155" ToolTip="Загрузить информацию из табеля за данное число" Content="Загрузить из табеля " Name="button_loadUser" Click="button_loadUser_Click" Style="{StaticResource wpf_copy_tabel_image_hor}"/>
+                        <Button DockPanel.Dock="Left" Width="155" ToolTip='Добавить комментарий к документу "Смены"'
+                        Content="Добавить комментарий" Name="comment_smena_btn" Click="button_addComment_Click" Style="{StaticResource wpf_button}"/>
+                        <Button DockPanel.Dock="Left" Width="125" ToolTip='Отчистить список'
+                        Content="Отчистить таблицу" Name="clear_smena_btn" Click="button_clear_Click" Style="{StaticResource wpf_button}"/>
+
+
+                        <Button DockPanel.Dock="Right" Margin="0,0,6,0" Width="150" Visibility="Collapsed" Content="Добавить комментарий" Style="{StaticResource wpf_button}" Click="Button_comment_Click" />
+                    </DockPanel>
+                    <Uc:MyPanel DockPanel.Dock="Top" Margin="5,0,0,0" x:Name="smena_button_panel">
+
+                    </Uc:MyPanel>
+                    <!--панель для кнопок смены-->
+
+                </DockPanel>
+                <!-- Грид смены-->
+                <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                    <!-- Грид смены-->
+                    <ListView  MinHeight="210" MaxHeight="210" Name="listview_smeni"
+                           ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,0,0,10" Foreground="#FF0004E5" BorderBrush="#FFE8E8E8" 
+                               >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="FontSize" Value="13"/>
+                                <!--<Setter Property="Height" Value="40" />-->
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="true"
+              ColumnHeaderToolTip="Employee Information">
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style  TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+
+                                <GridViewColumn Header="Номер"
+                                        Width="60"
+                                        DisplayMemberBinding="{Binding Path=Number}" />
+                                <GridViewColumn  
+                                Width="280"
+                                Header="Сотрудник">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=user_name}" TextAlignment="Left"  MouseDown="user_update_click"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn                
+                      Width="200"
+                                Header="Обязанность" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                                <ComboBox x:Name="cmb_resp" HorizontalContentAlignment="Left" Background="LightBlue"  PreviewMouseDown="SelectCurrentListBoxItem"        
+                  ItemsSource="{Binding Path=user_response_list}" SelectedItem="{Binding Path=user_response}" SelectionChanged="cmb_selectionChanged" >
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Path=res_name}" TextAlignment="Left"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+
+                                <GridViewColumn  
+                      Header="Факт" 
+                                Width="90"
+                                >
+                                    <GridViewColumn.CellTemplate >
+                                        <DataTemplate>
+                                                <TextBox x:Name="txtFact" Text="{Binding Path=user_fact}" IsReadOnly="True"  PreviewMouseDown="SelectCurrentListBoxItem"        
+                                                     TextAlignment="Center" VerticalAlignment="Center"  MouseDoubleClick="cell_fact_dclick" 
+                                                     Background="{Binding Path=user_fact_color}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn 
+                      Header="План"
+                                Width="90"
+                                >
+                                    <GridViewColumn.CellTemplate >
+                                        <DataTemplate>
+                                            <TextBox x:Name="txtPlan" Text="{Binding Path=user_plan}" IsReadOnly="True" 
+                                                     TextAlignment="Center" VerticalAlignment="Center"   PreviewMouseDown="SelectCurrentListBoxItem"        
+                                                     Background="{Binding Path=user_plan_color}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn 
+                      Header="Комментарий" 
+                                Width="380"
+                                >
+                                    <GridViewColumn.CellTemplate >
+                                        <DataTemplate>
+                                                <Uc:PopupTextBox x:Name="popComment" Text="{Binding Path=comment}"   PreviewMouseDown="SelectCurrentListBoxItem"        
+                                                             MainTextChanged="popComment_MainTextChanged"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </DockPanel>
+            </DockPanel>
+        </Expander>
+
+        <Uc:WinExpander DockPanel.Dock="Top" x:Name="Win_Expander_base2">
+
+        </Uc:WinExpander>
+        <!--панель обедов-->
+        <Expander DockPanel.Dock="Top" Header="Панель обедов" IsExpanded="True" Name="Expander_base2">
+            <DockPanel Name="dinner_dock_panel" LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top" Margin="10,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold">Информация об обедах сотрудника</TextBlock>
+                <StackPanel DockPanel.Dock="Top"  Orientation="Horizontal" Height="30" Margin="5,0,0,0">
+                    <Button Width="135" ToolTip="Добавить пользователя в таблицу обедов" Content="Добавить польз. " Name="button_addUser1" Click="button_addUser1_Click" Style="{StaticResource wpf_add_button_image_hor}"/>
+                    <Button Width="125" ToolTip="Удалить пользователя" Content="Удалить польз. " Name="button_delUser1" Click="button_delUser1_Click" Style="{StaticResource wpf_rem_button_image_hor}"/>
+                    <Button Width="175" ToolTip="Скопировать пользователей из верхней таблицы" Content="Скопировать из табеля " Name="button_copyUsers" Click="button_copyUsers_Click" Style="{StaticResource wpf_copy_user_image_hor}"/>
+                    <Button Width="145" ToolTip="Загрузить обеды с касс" Content="Загрузить с кассы " 
+                            Name="button_copyFromMark" Click="button_copyFromMark_Click" Style="{StaticResource wpf_copy_dinners_image_hor}" />
+                    <Button DockPanel.Dock="Left" Width="155" ToolTip='Добавить комментарий к документу "Обеды"'
+                        Content="Добавить комментарий" Name="comment_dinner_btn" Click="button_addCommentdinner_Click" Style="{StaticResource wpf_button}"/>
+                    <Button DockPanel.Dock="Left" Width="125" ToolTip='Отчистить список обедов'
+                        Content="Отчистить таблицу" Name="clear_dinner_btn" Click="button_clear_Click1" Style="{StaticResource wpf_button}"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="20,0,0,0" FontSize="14" VerticalAlignment="Center" Text="Дата документа:" />
+
+                    <TextBlock Name="txtDateBlk" FontSize="13" FontWeight="Bold"  HorizontalAlignment="Center" Margin="5,0,0,0" VerticalAlignment="Center" Text="" />
+                </StackPanel>
+
+                <ListView  Name="listView_dinners" MinHeight="210" MaxHeight="210"  Foreground="#FF0004E5" ForceCursor="False" BorderBrush="#FFE8E8E8">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="FontSize" Value="15"/>
+                            <!--<Setter Property="Height" Value="40" /> -->
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <EventSetter Event="PreviewMouseDoubleClick" Handler="dinn_fact_dclick" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+
+                    <ListView.View>
+
+                        <GridView AllowsColumnReorder="true"
+              ColumnHeaderToolTip="Employee Information">
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style  TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Background" Value="LightBlue" />
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="Номер"
+                                        Width="60"
+                                        DisplayMemberBinding="{Binding Path=Number}" />
+
+                            <GridViewColumn Header="Сотрудник"
+                                        Width="280"
+                                        DisplayMemberBinding="{Binding Path=user_name}" />
+
+                            <GridViewColumn Header="Касса"
+                                        Width="60"
+                                        DisplayMemberBinding="{Binding Path=kkm_number}" />
+                            <GridViewColumn 
+                      Header="Обед" 
+                        Width="660"
+                        >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ListView ItemsSource="{Binding Path=SubDinnersItems,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinHeight="20">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="FontSize" Value="12"/>
+                                                    <!--  <Setter Property="Height" Value="40" />-->
+                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                                    <Setter Property="IsTabStop" Value="false"/>
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.View>
+                                                <GridView AllowsColumnReorder="true"
+                                                ColumnHeaderToolTip="Внесите обеды">
+                                                    <GridView.ColumnHeaderContainerStyle>
+                                                        <Style  TargetType="{x:Type GridViewColumnHeader}">
+                                                            <Setter Property="Background" Value="LightBlue" />
+                                                            <Setter Property="Height" Value="0" />
+                                                        </Style>
+                                                    </GridView.ColumnHeaderContainerStyle>
+                                                    <GridViewColumn  Width="250" DisplayMemberBinding="{Binding Path=m_nome}" >
+
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="70" DisplayMemberBinding="{Binding Path=m_quant,StringFormat='{}{0} шт.'}" />
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=m_price, StringFormat='{}{0} руб.'}"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+
+        </Expander>
+
+
+
+    </DockPanel>
+</ScrollViewer>
+</UserControl>
+     

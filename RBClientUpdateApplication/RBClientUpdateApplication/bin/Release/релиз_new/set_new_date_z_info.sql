@@ -1,0 +1,1 @@
+UPDATE t_InfoMessage SET timefrom='01.01.2014 11:00:00' WHERE id=5;

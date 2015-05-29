@@ -1,0 +1,1 @@
+Update t_conf set conf_value='' where conf_param='web_service_url'

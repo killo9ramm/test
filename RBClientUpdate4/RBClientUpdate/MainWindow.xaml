@@ -1,0 +1,12 @@
+﻿<Window x:Class="RBClientUpdate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Обновление АРМ УР" Height="155" Width="645" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Background="White" Closing="Window_Closing">
+    <Grid Height="372">
+        <TextBlock Height="31" HorizontalAlignment="Center" TextAlignment="Center"  Margin="0,34,0,0" Name="textBlock1" Text="Происходит обновление АРМ УР. Не закрывайте данное окно!!!" VerticalAlignment="Top" Width="454" FontSize="15" />
+        <ProgressBar Height="28" Name="progressBar1" Margin="221,89,12,255" Foreground="#FF863232" Background="White" FontSize="15" />
+        <TextBlock FontSize="15" Height="31" Visibility="Collapsed" HorizontalAlignment="Center" Margin="88,71,89,0" Name="textBlock2" Text="Закройте программу АРМ УР и нажмите Обновить!!!" TextAlignment="Center" VerticalAlignment="Top" Width="454" />
+        <TextBlock Height="31" HorizontalAlignment="Left" Margin="7,92,0,0" Name="textBlock3" Text="Обновление через..." TextAlignment="Left" VerticalAlignment="Top" Width="454" FontSize="15" />
+        <Button Content="Обновление через..." Visibility="Collapsed" IsEnabled="False" Height="31" HorizontalAlignment="Left" Margin="12,128,0,0" Name="button1" VerticalAlignment="Top" Width="147" Click="button1_Click" />
+    </Grid>
+</Window>

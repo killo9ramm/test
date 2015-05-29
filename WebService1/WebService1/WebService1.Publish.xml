@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="\\dev01\armservice" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="dev01" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="Service1.asmx" publishTime="11/19/2014 16:25:17" />
+    <file relUrl="bin/System.Web.Mvc.xml" publishTime="02/17/2010 07:22:24" />
+    <file relUrl="bin/WebService1.pdb" publishTime="04/28/2015 18:09:37" />
+    <file relUrl="bin/System.Web.Mvc.dll" publishTime="09/26/2014 10:51:06" />
+    <file relUrl="Web.config" publishTime="04/09/2015 15:26:24" />
+    <file relUrl="bin/System.Web.Services.dll" publishTime="03/04/2014 09:57:21" />
+    <file relUrl="bin/WebService1.dll" publishTime="04/28/2015 18:09:37" />
+    <file relUrl="bin/ru/System.Web.Mvc.resources.dll" publishTime="03/29/2010 17:36:52" />
+    <file relUrl="Math.asmx" publishTime="11/19/2014 16:36:42" />
+    <file relUrl="bin/System.Web.Routing.dll" publishTime="11/21/2010 06:25:14" />
+  </publishProfile>
+  <publishProfile publishUrl="\\dev01\armservice_test" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="ТЕСТ" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="False">
+    <file relUrl="Service1.asmx" publishTime="11/19/2014 16:25:17" />
+    <file relUrl="bin/System.Web.Mvc.xml" publishTime="02/17/2010 07:22:24" />
+    <file relUrl="bin/WebService1.pdb" publishTime="04/03/2015 16:05:13" />
+    <file relUrl="bin/System.Web.Routing.dll" publishTime="11/21/2010 06:25:14" />
+    <file relUrl="Web.config" publishTime="04/03/2015 16:05:13" />
+    <file relUrl="bin/System.Web.Services.dll" publishTime="03/04/2014 09:57:21" />
+    <file relUrl="bin/WebService1.dll" publishTime="04/03/2015 16:05:13" />
+    <file relUrl="bin/ru/System.Web.Mvc.resources.dll" publishTime="03/29/2010 17:36:52" />
+    <file relUrl="Math.asmx" publishTime="11/19/2014 16:36:42" />
+    <file relUrl="bin/System.Web.Mvc.dll" publishTime="09/26/2014 10:51:06" />
+  </publishProfile>
+</publishData>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Table>
+  <Columns>
+    <Colunm header="Название теремка" name="h1" member="kkm_terem_stat.teremok.teremok_name" cell_style_active="" cell_style_passive="" row_style_active="" row_style_passive="" order="" RefCatalog=""/>
+    <Colunm header="Имя 1С" name="h2" member="kkm_terem_stat.kassa.teremok_1c" cell_style_active="" cell_style_passive="" row_style_active="" row_style_passive="" order="" RefCatalog=""/>
+    <Colunm header="Номер кассы" name="h3" member="kkm_terem_stat.kassa.kkm_id" cell_style_active="" cell_style_passive="" row_style_active="" row_style_passive="" order="" RefCatalog=""/>
+    <Colunm header="Дата онлайн" name="h4" member="kkm_terem_stat.statistics.Last().date_recieved" cell_style_active="" cell_style_passive="" row_style_active="" row_style_passive="" order="" RefCatalog=""/>
+    <Colunm header="Продажи совершались" name="h5" member="kkm_terem_stat.statistics.First().date_recieved" cell_style_active="" cell_style_passive="" row_style_active="" row_style_passive="" order="" RefCatalog=""/>
+    <Colunm header="Арм забрал отчет с кассы" name="h6" member="kkm_terem_stat.z_reports_web.Count()" cell_style_active="" cell_style_passive="" row_style_active="" row_style_passive="" order="" RefCatalog=""/>
+    <Colunm header="Причина отсутствия отчета" name="h7" member="" cell_style_active="" cell_style_passive="" row_style_active="" row_style_passive="" order="" RefCatalog=""/>
+  </Columns>
+</Table>

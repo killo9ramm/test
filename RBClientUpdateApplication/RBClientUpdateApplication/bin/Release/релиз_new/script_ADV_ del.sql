@@ -1,0 +1,1 @@
+delete from t_conf where conf_param='web_service_exchange_timeout'

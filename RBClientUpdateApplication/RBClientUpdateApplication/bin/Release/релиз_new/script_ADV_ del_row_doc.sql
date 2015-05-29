@@ -1,0 +1,1 @@
+update t_doc set doc_datetime='18.08.2014 14:34:51' where doc_id=25000
